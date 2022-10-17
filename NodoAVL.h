@@ -1,36 +1,28 @@
-#ifndef _NODOAVL_H
-#define	_NODOAVL_H
+#ifndef NODOAVL_H
+#define NODOAVL_H
+
 #include <iostream>
-#include <conio.h>
+#include "ArbolRN.h"
 
+class NodoAVL {
 
-using namespace std;
+    private:
+        std::string nombre;
+        int codProducto;
+        NodoAVL *HIzq;
+        NodoAVL *HDer;
+        ArbolRN marcas;
 
-class NodoAVL{
-	
-	int altura;
-	int codProducto;
-	string nombre;
-	NodoAVL *der;
-	NodoAVL *izq;
-	//ArbolRN marcas;
-	
-	NodoAVL(int pCodProducto, string pNombre){
-		
-		altura = 1;
-		codProducto = pCodProducto;
-		nombre = pNombre;
-		der = NULL;
-		izq = NULL;
-		
-	}
-	
-	
-	friend class ArbolAVL;
-	
-	
-	
-	
+    public:
+        NodoAVL(std::string pNombre, int pCodProducto) {
+
+            nombre = pNombre;
+            codProducto = pCodProducto;
+            HIzq = NULL;
+            HDer = NULL;
+        }
+
+    friend class ArbolAVL;
 };
 
 #endif

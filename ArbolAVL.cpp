@@ -1,57 +1,89 @@
 #include "ArbolAVL.h"
+#include <iostream>
 
-void ArbolAVL::podar(){ // destructores
-	
-	if(raiz != NULL){
-		podarAVL(raiz->der);
-		podarAVL(raiz->izq);
-		delete raiz;
-	}	
+using namespace std;
+
+void ArbolAVL::podar() {
+
+    if (raiz != NULL) {
+
+        podarRecursivo(raiz -> HIzq);
+        podarRecursivo(raiz -> HDer);
+        delete raiz;
+    }
 }
 
-void ArbolAVL::podarAVL(NodoAVL *raiz){ // destructores
-	
-	if (raiz != NULL){
-		podarAVL(raiz->der);
-		podarAVL(raiz->izq);
-		delete raiz;
-	}
+void ArbolAVL::podarRecursivo(NodoAVL *raiz) {
+
+    if (raiz != NULL) {
+
+        podarRecursivo(raiz -> HIzq);
+        podarRecursivo(raiz -> HDer);
+        delete raiz;
+    }
 }
 
-void ArbolAVL::insertar(int pCodProducto, string pNombre){
-	
-	if (raiz == NULL){
-		
-		raiz = new NodoAVL(pCodProducto, pNombre);
-	}
-	else{
-	
-		if (raiz->codProducto > pCodProducto){
-			
-			insertarAVL (pCodProducto, pNombre, raiz->izq);
-		}
-		else{
-			insertarAVL (pCodProducto, pNombre, raiz->der);
-		}
-	}
-	
-	
+void ArbolAVL::insertar(string pNombre, int pCodProducto) {
+
+    if (raiz == NULL)
+        raiz = new NodoAVL(pNombre, pCodProducto);
+    else {
+
+        if (!existeCodigo(pCodProducto)){
+
+            if (pCodProducto < raiz -> codProducto)
+                insertarBinario(raiz -> HIzq, pNombre, pCodProducto);
+            else
+                insertarBinario(raiz -> HDer, pNombre, pCodProducto);
+        }
+    }
 }
 
-void ArbolAVL::insertarAVL(int pCodProducto, string pNombre, NodoAVL *raiz){
-	
-	if (raiz == NULL){
-		
-		raiz = new NodoAVL(pCodProducto, pNombre);
-	}
-	else{
-	
-		if (raiz->codProducto > pCodProducto){
-			
-			insertarAVL (pCodProducto, pNombre, raiz->izq);
-		}
-		else{
-			insertarAVL (pCodProducto, pNombre, raiz->der);
-		}
-	}
+void ArbolAVL::insertarBinario(NodoAVL *raiz, string pNombre, int pCodProducto){
+
+    if (raiz == NULL)
+        raiz = new NodoAVL(pNombre, pCodProducto);
+    else {
+
+        if (pCodProducto < raiz -> codProducto)
+            insertarBinario(raiz -> HIzq, pNombre, pCodProducto);
+        else
+            insertarBinario(raiz -> HDer, pNombre, pCodProducto);
+    }
+}
+
+bool ArbolAVL::existeCodigo(int pCodProducto) {
+
+    if (raiz == NULL)
+        return false;
+    else {
+
+        if (raiz -> codProducto == pCodProducto)
+            return true;
+        else {
+            
+            if (pCodProducto < raiz -> codProducto)
+                existeCodigoRecursivo(pCodProducto, raiz -> HIzq);
+            else
+                existeCodigoRecursivo(pCodProducto, raiz -> HDer);
+        }
+    }
+}
+
+bool ArbolAVL::existeCodigoRecursivo(int pCodProducto, NodoAVL *raiz) {
+
+    if (raiz == NULL)
+        return false;
+    else {
+
+        if (raiz -> codProducto == pCodProducto)
+            return true;
+        else {
+
+            if (pCodProducto < raiz -> codProducto)
+                existeCodigoRecursivo(pCodProducto, raiz -> HIzq);
+            else
+                existeCodigoRecursivo(pCodProducto, raiz -> HDer);
+        }
+    }
 }

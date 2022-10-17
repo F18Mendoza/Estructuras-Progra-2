@@ -1,33 +1,27 @@
-#ifndef _ARBOLAVL_H
-#define	_ARBOLAVL_H
+#ifndef ARBOLAVL_H
+#define ARBOLAVL_H
 
-#include "NodoAVL.h"
 #include <iostream>
-#include <conio.h>
+#include "NodoAVL.h"
 
 using namespace std;
 
-class ArbolAVL{
-	
-	private:
-	
-		NodoAVL *raiz;
-	
-	public:
-		
-		ArbolAVL(){
-			
-			raiz = NULL;
-			
-		}
-		
-		void insertar(int pCodProducto, string pNombre);
-		void insertarAVL(int pCodProducto, string pNombre,NodoAVL *raiz);
-		void podar();
-		void podarAVL(NodoAVL*raiz);
-	
-	
-	
+class ArbolAVL {
+
+    private:
+        NodoAVL *raiz;
+    
+    public:
+        ArbolAVL() {raiz = NULL;}
+
+        void insertar(string pNombre, int pCodProducto);
+        void insertarBinario(NodoAVL *raiz, string pNombre, int pCodProducto);
+        void podar();
+        void podarRecursivo(NodoAVL *raiz);
+        bool existeCodigo(int pCodProducto);
+        bool existeCodigoRecursivo(int pCodProducto, NodoAVL *raiz);
+
+    friend class NodoBB;
 };
 
 #endif

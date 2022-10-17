@@ -41,7 +41,7 @@ void menuClientesRegistrado(){
 			
 		case '5': 
 			cout << "Adios. Vuelva pronto" << endl;
-			
+			break;
 		default:
 			cout << "Opcion invalida" << endl;
 	}
@@ -85,6 +85,7 @@ void menuClientesNoRegistrado(){
 			
 		case '5': 
 			cout << "Adios. Vuelva pronto" << endl;
+			break;
 			
 		default:
 			cout << "Opcion invalida" << endl;
