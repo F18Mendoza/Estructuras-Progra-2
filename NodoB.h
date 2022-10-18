@@ -6,15 +6,17 @@
 
 class NodoB {
 
-    private:
-        std::string nombre;
+
+    public:
+    	
+    	std::string nombre;
         std::string correo;
         int cedula;
         int telefono;
         NodoB *HIzq;
         NodoB *HDer;
-
-    public:
+        
+        
         NodoB(int pCedula, std::string pNombre, int pTelefono, std::string pCorreo) {
 
             nombre = pNombre;
@@ -26,6 +28,7 @@ class NodoB {
         }
 
     friend class ArbolB;
+    friend class Main;
 };
 
 #endif

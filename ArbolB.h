@@ -9,9 +9,10 @@ using namespace std;
 class ArbolB {
 
     private:
-        NodoB *raiz;
+        
     
     public:
+    	NodoB *raiz;
         ArbolB() {raiz = NULL;}
 
         void insertar(int pCedula, string pNombre, int pTelefono, string pCorreo);
@@ -20,6 +21,9 @@ class ArbolB {
         void podarRecursivo(NodoB *raiz);
         bool existeCedula(int pCedula);
         bool existeCedulaRecursivo(int pCedula, NodoB *raiz);
+        void PreordenR(NodoB *R);
+        void mostrar();
+        void mostrarRecursivo(NodoB *raiz);
 
 };
 
