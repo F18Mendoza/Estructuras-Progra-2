@@ -289,8 +289,8 @@ int main() {
 		administradores.insertar(iAdmin, sNombre);
 	
 	}
-	clientes.mostrar();
-	administradores.mostrarAdmin();
+	//clientes.mostrar();
+	//administradores.mostrarAdmin();
 
 
 
@@ -304,7 +304,11 @@ int main() {
 	*/
 	
 	//clientes.mostrar();
-	/*char ingreso;
+	
+	
+	char ingreso;
+	int cedCliente;
+	int codigoAdmin;
 		
 	while(ingreso != '3'){
 		
@@ -323,11 +327,26 @@ int main() {
 			
 			case '1':
 				cout << "-------MENU DE CLIENTE-----------\n" << endl;
+				
+				cout << "Si usted es un cliente registrado ingrese su cedula: \n" << endl;
+				cin >> cedCliente;
+				if(clientes.existeCedula(cedCliente)){
+					menuClientesRegistrado();
+				}
+				cout << "Usted no es un cliente registrado" << endl;
 				menuClientesNoRegistrado();
 				break;
 			case '2':
-				cout << "-------MENU DE ADMINISTRADOR-------\n" << endl;	
-				menuAdministrador();
+				cout << "-------MENU DE ADMINISTRADOR-------\n" << endl;
+					
+				cout << "Ingrese su codigo de administrador" << endl;
+				cin >> codigoAdmin;
+				if (administradores.existeAdmin(codigoAdmin)){
+					menuAdministrador();
+				}
+				
+				cout << "Codigo invalido" << endl;
+					
 				break;
 			case '3':
 				cout << "Adios. Vuelva pronto" << endl;
@@ -335,7 +354,7 @@ int main() {
 			default:
 				cout << "-------Opcion Invalida-----------\n" << endl;
 		}	
-	}*/
+	}
 	
 	cout << "Hola" <<endl;
 	
