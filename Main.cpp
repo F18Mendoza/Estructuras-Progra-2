@@ -199,6 +199,10 @@ int main() {
 	
 //-------------------------------------------- Lectura de archivos txt	
 
+
+
+//------------------------LECTURA DE CLIENTES -----------------------------------
+
 	ArbolB clientes;
 	size_t posicion;
 	string linea;
@@ -209,38 +213,37 @@ int main() {
 	int iTelefono;
 	string sCorreo;
 	
-	
 	ifstream archivo5("Clientes.txt");
 	while (getline(archivo5, linea)){
-		cout << "-----------------------" << endl;
+		//cout << "-----------------------" << endl;
 		
 		sCedula = linea.substr(0, linea.find(";"));
 		posicion = linea.find(";");
 		linea.erase (0, posicion+1);
-		cout << sCedula << endl;
+		//cout << sCedula << endl;
 		
 		sCliente = linea.substr(0, linea.find(";"));
 		posicion = linea.find(";");
 		linea.erase(0, posicion+1);
-		cout <<  sCliente << endl;
+		//cout <<  sCliente << endl;
 		
 		sTelefono = linea.substr(0, linea.find(";"));
 		posicion = linea.find(";");
 		linea.erase (0, posicion+1);
-		cout <<  sTelefono << endl;
+		//cout <<  sTelefono << endl;
 		
 		sCorreo = linea.substr(0, linea.find(";"));
 		posicion = linea.find(";");
 		linea.erase (0, posicion);
-		cout << sCorreo << endl;
+		//cout << sCorreo << endl;
 		
 		//----------conversion a int de los parametros necesarios
 		
 		try{
 			iCedula = stoi(sCedula);
-			cout << "Ya es int: " << iCedula << "   ";
+			//cout << "Ya es int: " << iCedula << "   ";
 			iTelefono = stoi(sTelefono);
-			cout << iTelefono << endl;
+			//cout << iTelefono << endl;
 		}
 		catch (std::exception& e) {
 		}
@@ -252,6 +255,42 @@ int main() {
 
 
 
+//------------------------LECTURA DE ADMINISTRADORES -----------------------------------
+
+	string sAdminCod;
+	int iAdmin;
+	string sNombre;
+	ArbolB administradores;
+
+	ifstream archivo6("Administradores.txt");
+	while (getline(archivo6, linea)){
+		
+		//cout << "----------------------" << endl;
+		
+		sAdminCod = linea.substr(0, linea.find(";"));
+		posicion = linea.find(";");
+		linea.erase (0, posicion+1);
+		//cout << sAdminCod << endl;
+		
+		sNombre = linea.substr(0, linea.find(";"));
+		posicion = linea.find(";");
+		linea.erase(0, posicion+1);
+		//cout << sNombre << endl;
+		
+		//----------conversion a int de los parametros necesarios
+		
+		try{
+			iAdmin = stoi(sAdminCod);
+			//cout << "Ya es int: " << iAdmin << endl;
+		}
+		catch (std::exception& e) {
+		}
+		
+		administradores.insertar(iAdmin, sNombre);
+	
+	}
+	clientes.mostrar();
+	administradores.mostrarAdmin();
 
 
 
@@ -264,7 +303,7 @@ int main() {
 	clientes.insertar( 3007, "Elli", 1311, "eli@gmail.com");
 	*/
 	
-	clientes.mostrar();
+	//clientes.mostrar();
 	/*char ingreso;
 		
 	while(ingreso != '3'){

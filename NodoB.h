@@ -13,6 +13,7 @@ class NodoB {
         std::string correo;
         int cedula;
         int telefono;
+        int codAdmin;
         NodoB *HIzq;
         NodoB *HDer;
         
@@ -26,6 +27,14 @@ class NodoB {
             HIzq = NULL;
             HDer = NULL;
         }
+        
+        NodoB(int pAdmin, std::string pNombre){
+        	
+        	nombre = pNombre;
+        	codAdmin = pAdmin;
+        	NodoB *HIzq;
+        	NodoB *HDer;
+		}
 
     friend class ArbolB;
     friend class Main;
