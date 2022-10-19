@@ -130,3 +130,47 @@ bool ArbolAVL::existeCodigoRecursivo(int pCodProducto, NodoAVL *r) {
         }
     }
 }
+
+void ArbolAVL::mostrarProductos() {
+	
+	if (raiz != NULL) {
+		mostrarProductosRecursivo(raiz -> HIzq);
+		cout << raiz -> codProducto << " " << raiz -> nombre << endl;
+		mostrarProductosRecursivo(raiz -> HDer);
+	}
+}
+
+void ArbolAVL::mostrarProductosRecursivo(NodoAVL *r) {
+	
+	if (r != NULL) {
+		mostrarProductosRecursivo(r -> HIzq);
+		cout << r -> codProducto << " " << r -> nombre << endl;
+		mostrarProductosRecursivo(r -> HDer);
+	}
+}
+
+void ArbolAVL::mostrarMarcas(int pCodProducto) {
+	
+	if (raiz -> codProducto == pCodProducto) {
+		raiz -> marcas.mostrar();
+	} else {
+		if (pCodProducto < raiz -> codProducto) {
+			mostrarMarcasRecursivo(raiz -> HIzq, pCodProducto);
+		} else {
+			mostrarMarcasRecursivo(raiz -> HDer, pCodProducto);
+		}
+	}
+}
+
+void ArbolAVL::mostrarMarcasRecursivo(NodoAVL *r, int pCodProducto) {
+	
+	if (r -> codProducto == pCodProducto) {
+		r -> marcas.mostrar();
+	} else {
+		if (pCodProducto < r -> codProducto) {
+			mostrarMarcasRecursivo(r -> HIzq, pCodProducto);
+		} else {
+			mostrarMarcasRecursivo(r -> HDer, pCodProducto);
+		}
+	}
+}

@@ -23,6 +23,10 @@ class ArbolAVL {
         void podarRecursivo(NodoAVL *r);
         bool existeCodigo(int pCodProducto);
         bool existeCodigoRecursivo(int pCodProducto, NodoAVL *r);
+        void mostrarProductos();
+        void mostrarProductosRecursivo(NodoAVL *r);
+        void mostrarMarcas(int pCodProducto);
+        void mostrarMarcasRecursivo(NodoAVL *r, int pCodProducto);
 
     friend class NodoBB;
 };

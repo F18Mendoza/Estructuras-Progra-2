@@ -32,25 +32,41 @@ void ArbolRN::insertar(string pNombre, int pCodMarca, int pCantidad, float pPrec
         if (!existeCodigo(pCodMarca)){
 
             if (pCodMarca < raiz -> codMarca)
-                insertarBinario(raiz -> HIzq, pNombre, pCodMarca, pCantidad, pPrecio);
+                insertarRecursivoIzq(raiz -> HIzq, pNombre, pCodMarca, pCantidad, pPrecio);
             else
-                insertarBinario(raiz -> HDer, pNombre, pCodMarca, pCantidad, pPrecio);
+                insertarRecursivoDer(raiz -> HDer, pNombre, pCodMarca, pCantidad, pPrecio);
         }
     }
 }
 
-void ArbolRN::insertarBinario(NodoRN *raiz, string pNombre, int pCodMarca, int pCantidad, float pPrecio){
+void ArbolRN::insertarRecursivoIzq(NodoRN *r, string pNombre, int pCodMarca, int pCantidad, float pPrecio){
 
-    if (raiz == NULL)
-        raiz = new NodoRN(pNombre, pCodMarca, pCantidad, pPrecio);
-    else {
-
-        if (pCodMarca < raiz -> codMarca)
-            insertarBinario(raiz -> HIzq, pNombre, pCodMarca, pCantidad, pPrecio);
-        else
-            insertarBinario(raiz -> HDer, pNombre, pCodMarca, pCantidad, pPrecio);
+    if (r -> HIzq == NULL) {
+    	r -> HIzq = new NodoRN(pNombre, pCodMarca, pCantidad, pPrecio);
+    } else {
+        if (pCodMarca < r -> codMarca){
+            insertarRecursivoIzq(r -> HIzq, pNombre, pCodMarca, pCantidad, pPrecio);
+        } else {
+            insertarRecursivoDer(r -> HDer, pNombre, pCodMarca, pCantidad, pPrecio);
+        }
     }
 }
+
+void ArbolRN::insertarRecursivoDer(NodoRN *r, string pNombre, int pCodMarca, int pCantidad, float pPrecio){
+
+    if (r -> HDer == NULL) {
+    	r -> HDer = new NodoRN(pNombre, pCodMarca, pCantidad, pPrecio);
+        
+    } else {
+
+        if (pCodMarca < r -> codMarca){
+            insertarRecursivoIzq(r -> HIzq, pNombre, pCodMarca, pCantidad, pPrecio);
+        } else {
+            insertarRecursivoDer(r -> HDer, pNombre, pCodMarca, pCantidad, pPrecio);
+        }
+    }
+}
+
 
 bool ArbolRN::existeCodigo(int pCodMarca) {
 
@@ -86,4 +102,22 @@ bool ArbolRN::existeCodigoRecursivo(int pCodMarca, NodoRN *raiz) {
                 existeCodigoRecursivo(pCodMarca, raiz -> HDer);
         }
     }
+}
+
+void ArbolRN::mostrar() {
+	
+	if (raiz != NULL) {
+		mostrarRecursivo(raiz -> HIzq);
+		cout << raiz -> codMarca << " " << raiz -> nombre << " " << raiz -> cantidad << " " << raiz -> precio << endl;
+		mostrarRecursivo(raiz -> HDer);
+	}
+}
+
+void ArbolRN::mostrarRecursivo(NodoRN *r) {
+	
+	if (r != NULL) {
+		mostrarRecursivo(r -> HIzq);
+		cout << r -> codMarca << " " << r -> nombre << " " << r -> cantidad << " " << r -> precio << endl;
+		mostrarRecursivo(r -> HDer);
+	}
 }

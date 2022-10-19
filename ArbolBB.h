@@ -25,6 +25,12 @@ class ArbolBB {
         void insertarProductoRecursivo(NodoBB *r, string pNombre, int pCodPasillo, int pCodProducto);
         void insertarMarca(string pNombre, int pCodPasillo, int pCodProducto, int pCodMarca, int pCantidad, float pPrecio);
         void insertarMarcaRecursivo(NodoBB *r, string pNombre, int pCodPasillo, int pCodProducto, int pCodMarca, int pCantidad, float pPrecio);
+        void mostrarPasillos();
+        void mostrarPasillosRecursivo(NodoBB *r);
+        void mostrarProductos(int pCodPasillo);
+        void mostrarProductosRecursivo(NodoBB *r, int pCodPasillo);
+        void mostrarMarcas(int pCodPasillo, int pCodProducto);
+        void mostrarMarcasRecursivo(NodoBB *r, int pCodPasillo, int pCodProducto);
 };
 
 #endif

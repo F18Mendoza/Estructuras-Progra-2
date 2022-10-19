@@ -153,3 +153,75 @@ void ArbolBB::insertarMarcaRecursivo(NodoBB *r, string pNombre, int pCodPasillo,
 		}
 	}
 }
+
+void ArbolBB::mostrarPasillos() {
+	
+	if (raiz != NULL) {
+		
+		mostrarPasillosRecursivo(raiz -> HIzq);
+		cout << raiz -> codPasillo << " " << raiz -> nombre << endl;
+		mostrarPasillosRecursivo(raiz -> HDer);
+	}
+}
+
+void ArbolBB::mostrarPasillosRecursivo(NodoBB *r) {
+	
+	if (r != NULL) {
+		
+		mostrarPasillosRecursivo(r -> HIzq);
+		cout << r -> codPasillo << " " << r -> nombre << endl;
+		mostrarPasillosRecursivo(r -> HDer);
+	}
+}
+
+void ArbolBB::mostrarProductos(int pCodPasillo) {
+	
+	if (raiz -> codPasillo == pCodPasillo) {
+		raiz -> productos.mostrarProductos();
+	} else {
+		if (pCodPasillo < raiz -> codPasillo) {
+			mostrarProductosRecursivo(raiz -> HIzq, pCodPasillo);
+		} else {
+			mostrarProductosRecursivo(raiz -> HDer, pCodPasillo);
+		}
+	}
+}
+
+void ArbolBB::mostrarProductosRecursivo(NodoBB *r, int pCodPasillo) {
+	
+	if (r -> codPasillo == pCodPasillo) {
+		r -> productos.mostrarProductos();
+	} else {
+		if (pCodPasillo < r -> codPasillo) {
+			mostrarProductosRecursivo(r -> HIzq, pCodPasillo);
+		} else {
+			mostrarProductosRecursivo(r -> HDer, pCodPasillo);
+		}
+	}
+}
+
+void ArbolBB::mostrarMarcas(int pCodPasillo, int pCodProducto) {
+	
+	if (raiz -> codPasillo == pCodPasillo) {
+		raiz -> productos.mostrarMarcas(pCodProducto);
+	} else {
+		if (pCodPasillo < raiz -> codPasillo) {
+			mostrarMarcasRecursivo(raiz -> HIzq, pCodPasillo, pCodProducto);
+		} else {
+			mostrarMarcasRecursivo(raiz -> HDer, pCodPasillo, pCodProducto);
+		}
+	}
+}
+
+void ArbolBB::mostrarMarcasRecursivo(NodoBB *r, int pCodPasillo, int pCodProducto) {
+	
+	if (r -> codPasillo == pCodPasillo) {
+		r -> productos.mostrarMarcas(pCodProducto);
+	} else {
+		if (pCodPasillo < r -> codPasillo) {
+			mostrarMarcasRecursivo(r -> HIzq, pCodPasillo, pCodProducto);
+		} else {
+			mostrarMarcasRecursivo(r -> HDer, pCodPasillo, pCodProducto);
+		}
+	}
+}
