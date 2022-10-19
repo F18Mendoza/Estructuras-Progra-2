@@ -1,6 +1,8 @@
+#include <fstream>
+#include <sstream>
+#include <string>
 #include <iostream>
 #include "ArbolB.h"
-#include <iostream>
 #include <conio.h>
 
 using namespace std;
@@ -195,13 +197,73 @@ void menuAdministrador(){
 
 int main() {
 	
-	
+//-------------------------------------------- Lectura de archivos txt	
+
 	ArbolB clientes;
+	size_t posicion;
+	string linea;
+	string sCedula; // s  por string
+	int iCedula;	// i  por int
+	string sCliente;
+	string sTelefono;
+	int iTelefono;
+	string sCorreo;
+	
+	
+	ifstream archivo5("Clientes.txt");
+	while (getline(archivo5, linea)){
+		cout << "-----------------------" << endl;
+		
+		sCedula = linea.substr(0, linea.find(";"));
+		posicion = linea.find(";");
+		linea.erase (0, posicion+1);
+		cout << sCedula << endl;
+		
+		sCliente = linea.substr(0, linea.find(";"));
+		posicion = linea.find(";");
+		linea.erase(0, posicion+1);
+		cout <<  sCliente << endl;
+		
+		sTelefono = linea.substr(0, linea.find(";"));
+		posicion = linea.find(";");
+		linea.erase (0, posicion+1);
+		cout <<  sTelefono << endl;
+		
+		sCorreo = linea.substr(0, linea.find(";"));
+		posicion = linea.find(";");
+		linea.erase (0, posicion);
+		cout << sCorreo << endl;
+		
+		//----------conversion a int de los parametros necesarios
+		
+		try{
+			iCedula = stoi(sCedula);
+			cout << "Ya es int: " << iCedula << "   ";
+			iTelefono = stoi(sTelefono);
+			cout << iTelefono << endl;
+		}
+		catch (std::exception& e) {
+		}
+			
+		
+		clientes.insertar(iCedula, sCliente, iTelefono, sCorreo);	
+	}
+
+
+
+
+
+
+
+
+	/*ArbolB clientes;
 	
 	clientes.insertar( 3001, "amanda", 1811, "fm@gmail.com");
 	clientes.insertar( 3002, "Elliot", 1311, "em@gmail.com");
 	clientes.insertar( 3002, "Repetido", 1415, "rep@gmail.com");
 	clientes.insertar( 3007, "Elli", 1311, "eli@gmail.com");
+	*/
+	
 	clientes.mostrar();
 	/*char ingreso;
 		
