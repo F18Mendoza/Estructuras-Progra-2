@@ -32,23 +32,38 @@ void ArbolAVL::insertar(string pNombre, int pCodProducto) {
         if (!existeCodigo(pCodProducto)){
 
             if (pCodProducto < raiz -> codProducto)
-                insertarBinario(raiz -> HIzq, pNombre, pCodProducto);
+                insertarRecursivoIzq(raiz -> HIzq, pNombre, pCodProducto);
             else
-                insertarBinario(raiz -> HDer, pNombre, pCodProducto);
+                insertarRecursivoDer(raiz -> HDer, pNombre, pCodProducto);
         }
     }
 }
 
-void ArbolAVL::insertarBinario(NodoAVL *raiz, string pNombre, int pCodProducto){
+void ArbolAVL::insertarRecursivoIzq(NodoAVL *r, string pNombre, int pCodProducto){
 
-    if (raiz == NULL)
-        raiz = new NodoAVL(pNombre, pCodProducto);
-    else {
+    if (r -> HIzq == NULL) {
+    	r -> HIzq = new NodoAVL(pNombre, pCodProducto);
+    } else {
+        if (pCodProducto < r -> codProducto){
+            insertarRecursivoIzq(r -> HIzq, pNombre, pCodProducto);
+        } else {
+            insertarRecursivoDer(r -> HDer, pNombre, pCodProducto);
+        }
+    }
+}
 
-        if (pCodProducto < raiz -> codProducto)
-            insertarBinario(raiz -> HIzq, pNombre, pCodProducto);
-        else
-            insertarBinario(raiz -> HDer, pNombre, pCodProducto);
+void ArbolAVL::insertarRecursivoDer(NodoAVL *r, string pNombre, int pCodProducto){
+
+    if (r -> HDer == NULL) {
+    	r -> HDer = new NodoAVL(pNombre, pCodProducto);
+        
+    } else {
+
+        if (pCodProducto < r -> codProducto){
+            insertarRecursivoIzq(r -> HIzq, pNombre, pCodProducto);
+        } else {
+            insertarRecursivoDer(r -> HDer, pNombre, pCodProducto);
+        }
     }
 }
 

@@ -9,14 +9,14 @@ using namespace std;
 class ArbolB {
 
     private:
-        
+        NodoB *raiz;
     
     public:
-    	NodoB *raiz;
         ArbolB() {raiz = NULL;}
 
         void insertar(int pCedula, string pNombre, int pTelefono, string pCorreo);
-        void insertarBinario(NodoB *raiz, int pCedula, string pNombre, int pTelefono, string pCorreo);
+        void insertarRecursivoIzq(NodoB *r, int pCedula, string pNombre, int pTelefono, string pCorreo);
+        void insertarRecursivoDer(NodoB *r, int pCedula, string pNombre, int pTelefono, string pCorreo);
         void podar();
         void podarRecursivo(NodoB *raiz);
         bool existeCedula(int pCedula);

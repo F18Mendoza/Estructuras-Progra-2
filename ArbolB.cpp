@@ -27,19 +27,21 @@ void ArbolB::mostrar(){
 	
 	if (raiz != NULL){
 		
-		mostrarRecursivo(raiz->HIzq);
-		mostrarRecursivo(raiz->HDer);
+		if (raiz -> HIzq != NULL)
+			mostrarRecursivo(raiz->HIzq);
+		if (raiz -> HDer != NULL)
+			mostrarRecursivo(raiz->HDer);
 		cout << raiz->nombre << endl;
 	}
 }
 
-void ArbolB::mostrarRecursivo(NodoB *raiz){
+void ArbolB::mostrarRecursivo(NodoB *nodo){
 	
-	if (raiz != NULL){
+	if (nodo != NULL){
 		
-		mostrarRecursivo(raiz->HIzq);
-		mostrarRecursivo(raiz->HDer);
-		cout << raiz->nombre << endl;
+		mostrarRecursivo(nodo->HIzq);
+		mostrarRecursivo(nodo->HDer);
+		cout << nodo->nombre << endl;
 	}
 }
 
@@ -89,25 +91,41 @@ void ArbolB::insertar(int pCedula, string pNombre, int pTelefono, string pCorreo
         if (!existeCedula(pCedula)){
 
             if (pCedula < raiz -> cedula)
-                insertarBinario(raiz -> HIzq, pCedula, pNombre, pTelefono, pCorreo);
+                insertarRecursivoIzq(raiz, pCedula, pNombre, pTelefono, pCorreo);
             else
-                insertarBinario(raiz -> HDer, pCedula, pNombre, pTelefono, pCorreo);
+                insertarRecursivoDer(raiz, pCedula, pNombre, pTelefono, pCorreo);
         }
     }
 }
 
-void ArbolB::insertarBinario(NodoB *raiz, int pCedula, string pNombre, int pTelefono, string pCorreo){
+void ArbolB::insertarRecursivoIzq(NodoB *r, int pCedula, string pNombre, int pTelefono, string pCorreo){
 
-    if (raiz == NULL)
-        raiz = new NodoB(pCedula, pNombre, pTelefono, pCorreo);
-    else {
-
-        if (pCedula < raiz -> cedula)
-            insertarBinario(raiz -> HIzq, pCedula, pNombre, pTelefono, pCorreo);
-        else
-            insertarBinario(raiz -> HDer, pCedula, pNombre, pTelefono, pCorreo);
+    if (r -> HIzq == NULL) {
+    	r -> HIzq = new NodoB(pCedula, pNombre, pTelefono, pCorreo);
+    } else {
+        if (pCedula < r -> cedula){
+            insertarRecursivoIzq(r -> HIzq, pCedula, pNombre, pTelefono, pCorreo);
+        } else {
+            insertarRecursivoDer(r -> HDer, pCedula, pNombre, pTelefono, pCorreo);
+        }
     }
 }
+
+void ArbolB::insertarRecursivoDer(NodoB *r, int pCedula, string pNombre, int pTelefono, string pCorreo){
+
+    if (r -> HDer == NULL) {
+    	r -> HDer = new NodoB(pCedula, pNombre, pTelefono, pCorreo);
+        
+    } else {
+
+        if (pCedula < r -> cedula){
+            insertarRecursivoIzq(r -> HIzq, pCedula, pNombre, pTelefono, pCorreo);
+        } else {
+            insertarRecursivoDer(r -> HDer, pCedula, pNombre, pTelefono, pCorreo);
+        }
+    }
+}
+
 
 void ArbolB::PreordenR(NodoB *R){
     
@@ -119,4 +137,5 @@ void ArbolB::PreordenR(NodoB *R){
         PreordenR(R->HDer);
     }
 }
+
 

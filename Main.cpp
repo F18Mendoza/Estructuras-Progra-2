@@ -1,5 +1,4 @@
 #include <iostream>
-#include "ArbolAVL.h"
 #include "ArbolB.h"
 #include <iostream>
 #include <conio.h>
@@ -199,11 +198,10 @@ int main() {
 	
 	ArbolB clientes;
 	
-	clientes.insertar(3001, "amanda", 1811, "fm@gmail.com");
-	clientes.insertar(3002, "Elliot", 1311, "em@gmail.com");
-	clientes.insertar(3005, "Repetido", 1415, "rep@gmail.com");
-	clientes.insertar(3007, "Elli", 1311, "eli@gmail.com");
-	//clientes.PreordenR(clientes.raiz);
+	clientes.insertar( 3001, "amanda", 1811, "fm@gmail.com");
+	clientes.insertar( 3002, "Elliot", 1311, "em@gmail.com");
+	clientes.insertar( 3002, "Repetido", 1415, "rep@gmail.com");
+	clientes.insertar( 3007, "Elli", 1311, "eli@gmail.com");
 	clientes.mostrar();
 	/*char ingreso;
 		

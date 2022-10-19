@@ -32,23 +32,39 @@ void ArbolBB::insertar(string pNombre, int pCodPasillo) {
         if (!existeCodigo(pCodPasillo)){
 
             if (pCodPasillo < raiz -> codPasillo)
-                insertarBinario(raiz -> HIzq, pNombre, pCodPasillo);
+                insertarRecursivoIzq(raiz -> HIzq, pNombre, pCodPasillo);
             else
-                insertarBinario(raiz -> HDer, pNombre, pCodPasillo);
+                insertarRecursivoDer(raiz -> HDer, pNombre, pCodPasillo);
         }
     }
 }
 
-void ArbolBB::insertarBinario(NodoBB *raiz, string pNombre, int pCodPasillo){
 
-    if (raiz == NULL)
-        raiz = new NodoBB(pNombre, pCodPasillo);
-    else {
+void ArbolBB::insertarRecursivoIzq(NodoBB *r, string pNombre, int pCodPasillo){
 
-        if (pCodPasillo < raiz -> codPasillo)
-            insertarBinario(raiz -> HIzq, pNombre, pCodPasillo);
-        else
-            insertarBinario(raiz -> HDer, pNombre, pCodPasillo);
+    if (r -> HIzq == NULL) {
+    	r -> HIzq = new NodoBB(pNombre, pCodPasillo);
+    } else {
+        if (pCodPasillo < r -> codPasillo){
+            insertarRecursivoIzq(r -> HIzq, pNombre, pCodPasillo);
+        } else {
+            insertarRecursivoDer(r -> HDer, pNombre, pCodPasillo);
+        }
+    }
+}
+
+void ArbolBB::insertarRecursivoDer(NodoBB *r, string pNombre, int pCodPasillo){
+
+    if (r -> HDer == NULL) {
+    	r -> HDer = new NodoBB(pNombre, pCodPasillo);
+        
+    } else {
+
+        if (pCodPasillo < r -> codPasillo){
+            insertarRecursivoIzq(r -> HIzq, pNombre, pCodPasillo);
+        } else {
+            insertarRecursivoDer(r -> HDer, pNombre, pCodPasillo);
+        }
     }
 }
 

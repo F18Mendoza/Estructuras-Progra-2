@@ -15,7 +15,8 @@ class ArbolBB {
         ArbolBB() {raiz = NULL;}
 
         void insertar(string pNombre, int pCodPasillo);
-        void insertarBinario(NodoBB *raiz, string pNombre, int pCodPasillo);
+        void insertarRecursivoIzq(NodoBB *r, string pNombre, int pCodPasillo);
+        void insertarRecursivoDer(NodoBB *r, string pNombre, int pCodPasillo);
         void podar();
         void podarRecursivo(NodoBB *raiz);
         bool existeCodigo(int pCodPasillo);
