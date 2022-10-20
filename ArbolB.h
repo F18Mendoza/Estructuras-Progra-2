@@ -30,6 +30,8 @@ class ArbolB {
         void mostrarRecursivo(NodoB *raiz);
         void mostrarAdmin();
         void mostrarAdminRecursivo(NodoB *raiz);
+        
+        friend class BaseDeDatos;
 
 };
 

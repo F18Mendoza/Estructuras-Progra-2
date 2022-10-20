@@ -38,6 +38,7 @@ class NodoB {
 
     friend class ArbolB;
     friend class Main;
+    friend class BaseDeDatos;
 };
 
 #endif

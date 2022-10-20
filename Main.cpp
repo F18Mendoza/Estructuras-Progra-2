@@ -100,6 +100,11 @@ void menuClientesNoRegistrado(){
 void baseDeDatos(){
 	
 	char datos;
+	string nomCliente;
+	int cedCliente;
+	int celCliente;
+	string correoCliente;
+	
 	
 	cout << " _____________________________________________________________" << endl;
 	cout << "|                   MENU BASE DE DATOS                        |" << endl;
@@ -138,6 +143,11 @@ void baseDeDatos(){
 		
 		case '6':
 			cout << "Registrar cliente" << endl;
+			cout << "El proceso que usted esta por realizar agregara al cliente a la base de datos\n" << endl;
+			cout << "Por favor ingrese la cedula del cliente: " << endl;
+			cin >> cedCliente;
+			
+			
 			break;
 		case '7':
 			cout << "Adios. Vuelva pronto" << endl;
@@ -289,22 +299,7 @@ int main() {
 		administradores.insertar(iAdmin, sNombre);
 	
 	}
-	//clientes.mostrar();
-	//administradores.mostrarAdmin();
 
-
-
-
-	/*ArbolB clientes;
-	
-	clientes.insertar( 3001, "amanda", 1811, "fm@gmail.com");
-	clientes.insertar( 3002, "Elliot", 1311, "em@gmail.com");
-	clientes.insertar( 3002, "Repetido", 1415, "rep@gmail.com");
-	clientes.insertar( 3007, "Elli", 1311, "eli@gmail.com");
-	*/
-	
-	//clientes.mostrar();
-	
 	
 	char ingreso;
 	int cedCliente;
@@ -332,6 +327,7 @@ int main() {
 				cin >> cedCliente;
 				if(clientes.existeCedula(cedCliente)){
 					menuClientesRegistrado();
+					break;
 				}
 				cout << "Usted no es un cliente registrado" << endl;
 				menuClientesNoRegistrado();
@@ -343,6 +339,7 @@ int main() {
 				cin >> codigoAdmin;
 				if (administradores.existeAdmin(codigoAdmin)){
 					menuAdministrador();
+					break;
 				}
 				
 				cout << "Codigo invalido" << endl;
