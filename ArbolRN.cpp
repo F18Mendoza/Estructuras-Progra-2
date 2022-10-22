@@ -63,9 +63,9 @@ bool ArbolRN::existeCodigo(int pCodMarca) {
         else {
             
             if (pCodMarca < raiz -> codMarca)
-                existeCodigoRecursivo(pCodMarca, raiz -> HIzq);
+                return existeCodigoRecursivo(pCodMarca, raiz -> HIzq);
             else
-                existeCodigoRecursivo(pCodMarca, raiz -> HDer);
+                return existeCodigoRecursivo(pCodMarca, raiz -> HDer);
         }
     }
 }
@@ -81,9 +81,9 @@ bool ArbolRN::existeCodigoRecursivo(int pCodMarca, NodoRN *&r) {
         else {
 
             if (pCodMarca < r -> codMarca)
-                existeCodigoRecursivo(pCodMarca, r -> HIzq);
+                return existeCodigoRecursivo(pCodMarca, r -> HIzq);
             else
-                existeCodigoRecursivo(pCodMarca, r -> HDer);
+                return existeCodigoRecursivo(pCodMarca, r -> HDer);
         }
     }
 }
@@ -91,8 +91,8 @@ bool ArbolRN::existeCodigoRecursivo(int pCodMarca, NodoRN *&r) {
 void ArbolRN::mostrarMarcas() {
 	
 	if (raiz != NULL) {
-		mostrarRecursivo(raiz -> HIzq);
 		cout << raiz -> codMarca << " " << raiz -> nombre << " " << raiz -> cantidad << " " << raiz -> precio << endl;
+		mostrarRecursivo(raiz -> HIzq);
 		mostrarRecursivo(raiz -> HDer);
 	}
 }
@@ -100,8 +100,8 @@ void ArbolRN::mostrarMarcas() {
 void ArbolRN::mostrarMarcasRecursivo(NodoRN *&r) {
 	
 	if (r != NULL) {
-		mostrarRecursivo(r -> HIzq);
 		cout << r -> codMarca << " " << r -> nombre << " " << r -> cantidad << " " << r -> precio << endl;
+		mostrarRecursivo(r -> HIzq);
 		mostrarRecursivo(r -> HDer);
 	}
 }
@@ -109,8 +109,8 @@ void ArbolRN::mostrarMarcasRecursivo(NodoRN *&r) {
 void ArbolRN::mostrar() {
 	
 	if (raiz != NULL) {
-		mostrarRecursivo(raiz -> HIzq);
 		cout << raiz -> codMarca << " " << raiz -> nombre << " " << raiz -> cantidad << " " << raiz -> precio << endl;
+		mostrarRecursivo(raiz -> HIzq);
 		mostrarRecursivo(raiz -> HDer);
 	}
 }
@@ -118,8 +118,8 @@ void ArbolRN::mostrar() {
 void ArbolRN::mostrarRecursivo(NodoRN *&r) {
 	
 	if (r != NULL) {
-		mostrarRecursivo(r -> HIzq);
 		cout << r -> codMarca << " " << r -> nombre << " " << r -> cantidad << " " << r -> precio << endl;
+		mostrarRecursivo(r -> HIzq);
 		mostrarRecursivo(r -> HDer);
 	}
 }

@@ -14,6 +14,7 @@ class ArbolB {
     public:
         ArbolB() {raiz = NULL;}
 
+		bool vacio() {return raiz == NULL;}
         void insertar(int pCedula, string pNombre, int pTelefono, string pCorreo);
         void insertarRecursivo(NodoB *&r, int pCedula, string pNombre, int pTelefono, string pCorreo);
         void insertar(int pAdmin, string pNombre);

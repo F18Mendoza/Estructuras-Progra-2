@@ -14,10 +14,13 @@ class ArbolAVL {
     public:
         ArbolAVL() {raiz = NULL;}
 
+		bool vacio() {return raiz == NULL;}
         void insertar(string pNombre, int pCodProducto);
         void insertarRecursivo(NodoAVL *&r,string pNombre, int pCodProducto);
         void insertarMarca(string pNombre, int pCodProducto, int pCodMarca, int pCantidad, float pPrecio);
         void insertarMarcaRecursivo(NodoAVL *&r, string pNombre, int pCodProducto, int pCodMarca, int pCantidad, float pPrecio);
+        void insertarInventario(string pNombre, int pCodProducto, int pCodMarca, int pStock, int pCanasta);
+        void insertarInventarioRecursivo(NodoAVL *&r, string pNombre, int pCodProducto, int pCodMarca, int pStock, int pCanasta);
         void podar();
         void podarRecursivo(NodoAVL *&r);
         bool existeCodigo(int pCodProducto);
@@ -26,6 +29,8 @@ class ArbolAVL {
         void mostrarProductosRecursivo(NodoAVL *&r);
         void mostrarMarcas(int pCodProducto);
         void mostrarMarcasRecursivo(NodoAVL *&r, int pCodProducto);
+        void mostrarInventario();
+        void mostrarInventarioRecursivo(NodoAVL *&r);
         void mostrar();
         void mostrarRecursivo(NodoAVL *&r);
 

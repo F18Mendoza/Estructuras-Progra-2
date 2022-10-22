@@ -75,9 +75,9 @@ bool ArbolB::existeCedula(int pCedula) {
         else {
             
             if (pCedula < raiz -> cedula)
-                existeCedulaRecursivo(pCedula, raiz -> HIzq);
+                return existeCedulaRecursivo(pCedula, raiz -> HIzq);
             else
-                existeCedulaRecursivo(pCedula, raiz -> HDer);
+                return existeCedulaRecursivo(pCedula, raiz -> HDer);
         }
     }
 }
@@ -93,9 +93,9 @@ bool ArbolB::existeCedulaRecursivo(int pCedula, NodoB *&r) {
         else {
 
             if (pCedula < r -> cedula)
-                existeCedulaRecursivo(pCedula, r -> HIzq);
+                return existeCedulaRecursivo(pCedula, r -> HIzq);
             else
-                existeCedulaRecursivo(pCedula, r -> HDer);
+                return existeCedulaRecursivo(pCedula, r -> HDer);
         }
     }
 }
@@ -111,9 +111,9 @@ bool ArbolB::existeAdmin(int pAdmin) {
         else {
             
             if (pAdmin < raiz -> codAdmin)
-                existeCedulaRecursivo(pAdmin, raiz -> HIzq);
+                return existeCedulaRecursivo(pAdmin, raiz -> HIzq);
             else
-                existeCedulaRecursivo(pAdmin, raiz -> HDer);
+                return existeCedulaRecursivo(pAdmin, raiz -> HDer);
         }
     }
 }
@@ -129,9 +129,9 @@ bool ArbolB::existeAdminRecursivo(int pAdmin, NodoB *&r) {
         else {
 
             if (pAdmin < r -> codAdmin)
-                existeCedulaRecursivo(pAdmin, r -> HIzq);
+                return existeCedulaRecursivo(pAdmin, r -> HIzq);
             else
-                existeCedulaRecursivo(pAdmin, r -> HDer);
+                return existeCedulaRecursivo(pAdmin, r -> HDer);
         }
     }
 }

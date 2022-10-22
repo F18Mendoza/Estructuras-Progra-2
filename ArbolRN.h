@@ -18,8 +18,8 @@ class ArbolRN {
         void insertarRecursivo(NodoRN *&r,string pNombre, int pCodMarca,int pCantidad, float pPrecio);
         void podar();
         void podarRecursivo(NodoRN *&r);
-        bool existeCodigo(int pCodPasillo);
-        bool existeCodigoRecursivo(int pCodPasillo, NodoRN *&r);
+        bool existeCodigo(int pCodMarca);
+        bool existeCodigoRecursivo(int pCodMarca, NodoRN *&r);
         void mostrar();
         void mostrarRecursivo(NodoRN *&r);
         void mostrarMarcas();
