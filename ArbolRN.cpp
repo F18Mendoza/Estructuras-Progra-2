@@ -13,13 +13,13 @@ void ArbolRN::podar() {
     }
 }
 
-void ArbolRN::podarRecursivo(NodoRN *raiz) {
+void ArbolRN::podarRecursivo(NodoRN *&r) {
 
-    if (raiz != NULL) {
+    if (r != NULL) {
 
-        podarRecursivo(raiz -> HIzq);
-        podarRecursivo(raiz -> HDer);
-        delete raiz;
+        podarRecursivo(r -> HIzq);
+        podarRecursivo(r -> HDer);
+        delete r;
     }
 }
 
@@ -32,41 +32,25 @@ void ArbolRN::insertar(string pNombre, int pCodMarca, int pCantidad, float pPrec
         if (!existeCodigo(pCodMarca)){
 
             if (pCodMarca < raiz -> codMarca)
-                insertarRecursivoIzq(raiz -> HIzq, pNombre, pCodMarca, pCantidad, pPrecio);
+                insertarRecursivo(raiz -> HIzq, pNombre, pCodMarca, pCantidad, pPrecio);
             else
-                insertarRecursivoDer(raiz -> HDer, pNombre, pCodMarca, pCantidad, pPrecio);
+                insertarRecursivo(raiz -> HDer, pNombre, pCodMarca, pCantidad, pPrecio);
         }
     }
 }
 
-void ArbolRN::insertarRecursivoIzq(NodoRN *r, string pNombre, int pCodMarca, int pCantidad, float pPrecio){
+void ArbolRN::insertarRecursivo(NodoRN *&r, string pNombre, int pCodMarca, int pCantidad, float pPrecio){
 
-    if (r -> HIzq == NULL) {
-    	r -> HIzq = new NodoRN(pNombre, pCodMarca, pCantidad, pPrecio);
+    if (r == NULL) {
+    	r = new NodoRN(pNombre, pCodMarca, pCantidad, pPrecio);
     } else {
         if (pCodMarca < r -> codMarca){
-            insertarRecursivoIzq(r -> HIzq, pNombre, pCodMarca, pCantidad, pPrecio);
+            insertarRecursivo(r -> HIzq, pNombre, pCodMarca, pCantidad, pPrecio);
         } else {
-            insertarRecursivoDer(r -> HDer, pNombre, pCodMarca, pCantidad, pPrecio);
+            insertarRecursivo(r -> HDer, pNombre, pCodMarca, pCantidad, pPrecio);
         }
     }
 }
-
-void ArbolRN::insertarRecursivoDer(NodoRN *r, string pNombre, int pCodMarca, int pCantidad, float pPrecio){
-
-    if (r -> HDer == NULL) {
-    	r -> HDer = new NodoRN(pNombre, pCodMarca, pCantidad, pPrecio);
-        
-    } else {
-
-        if (pCodMarca < r -> codMarca){
-            insertarRecursivoIzq(r -> HIzq, pNombre, pCodMarca, pCantidad, pPrecio);
-        } else {
-            insertarRecursivoDer(r -> HDer, pNombre, pCodMarca, pCantidad, pPrecio);
-        }
-    }
-}
-
 
 bool ArbolRN::existeCodigo(int pCodMarca) {
 
@@ -86,22 +70,40 @@ bool ArbolRN::existeCodigo(int pCodMarca) {
     }
 }
 
-bool ArbolRN::existeCodigoRecursivo(int pCodMarca, NodoRN *raiz) {
+bool ArbolRN::existeCodigoRecursivo(int pCodMarca, NodoRN *&r) {
 
-    if (raiz == NULL)
+    if (r == NULL)
         return false;
     else {
 
-        if (raiz -> codMarca == pCodMarca)
+        if (r -> codMarca == pCodMarca)
             return true;
         else {
 
-            if (pCodMarca < raiz -> codMarca)
-                existeCodigoRecursivo(pCodMarca, raiz -> HIzq);
+            if (pCodMarca < r -> codMarca)
+                existeCodigoRecursivo(pCodMarca, r -> HIzq);
             else
-                existeCodigoRecursivo(pCodMarca, raiz -> HDer);
+                existeCodigoRecursivo(pCodMarca, r -> HDer);
         }
     }
+}
+
+void ArbolRN::mostrarMarcas() {
+	
+	if (raiz != NULL) {
+		mostrarRecursivo(raiz -> HIzq);
+		cout << raiz -> codMarca << " " << raiz -> nombre << " " << raiz -> cantidad << " " << raiz -> precio << endl;
+		mostrarRecursivo(raiz -> HDer);
+	}
+}
+
+void ArbolRN::mostrarMarcasRecursivo(NodoRN *&r) {
+	
+	if (r != NULL) {
+		mostrarRecursivo(r -> HIzq);
+		cout << r -> codMarca << " " << r -> nombre << " " << r -> cantidad << " " << r -> precio << endl;
+		mostrarRecursivo(r -> HDer);
+	}
 }
 
 void ArbolRN::mostrar() {
@@ -113,7 +115,7 @@ void ArbolRN::mostrar() {
 	}
 }
 
-void ArbolRN::mostrarRecursivo(NodoRN *r) {
+void ArbolRN::mostrarRecursivo(NodoRN *&r) {
 	
 	if (r != NULL) {
 		mostrarRecursivo(r -> HIzq);

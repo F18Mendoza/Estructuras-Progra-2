@@ -9,17 +9,19 @@ void ArbolBB::podar() {
 
         podarRecursivo(raiz -> HIzq);
         podarRecursivo(raiz -> HDer);
+        raiz -> productos.podar();
         delete raiz;
     }
 }
 
-void ArbolBB::podarRecursivo(NodoBB *r) {
+void ArbolBB::podarRecursivo(NodoBB *&r) {
 
     if (r != NULL) {
 
         podarRecursivo(r -> HIzq);
         podarRecursivo(r -> HDer);
-        delete raiz;
+        r -> productos.podar();
+        delete r;
     }
 }
 
@@ -32,38 +34,23 @@ void ArbolBB::insertar(string pNombre, int pCodPasillo) {
         if (!existeCodigo(pCodPasillo)){
 
             if (pCodPasillo < raiz -> codPasillo)
-                insertarRecursivoIzq(raiz -> HIzq, pNombre, pCodPasillo);
+                insertarRecursivo(raiz -> HIzq, pNombre, pCodPasillo);
             else
-                insertarRecursivoDer(raiz -> HDer, pNombre, pCodPasillo);
+                insertarRecursivo(raiz -> HDer, pNombre, pCodPasillo);
         }
     }
 }
 
 
-void ArbolBB::insertarRecursivoIzq(NodoBB *r, string pNombre, int pCodPasillo){
+void ArbolBB::insertarRecursivo(NodoBB *&r, string pNombre, int pCodPasillo){
 
-    if (r -> HIzq == NULL) {
-    	r -> HIzq = new NodoBB(pNombre, pCodPasillo);
+    if (r == NULL) {
+    	r = new NodoBB(pNombre, pCodPasillo);
     } else {
         if (pCodPasillo < r -> codPasillo){
-            insertarRecursivoIzq(r -> HIzq, pNombre, pCodPasillo);
+            insertarRecursivo(r -> HIzq, pNombre, pCodPasillo);
         } else {
-            insertarRecursivoDer(r -> HDer, pNombre, pCodPasillo);
-        }
-    }
-}
-
-void ArbolBB::insertarRecursivoDer(NodoBB *r, string pNombre, int pCodPasillo){
-
-    if (r -> HDer == NULL) {
-    	r -> HDer = new NodoBB(pNombre, pCodPasillo);
-        
-    } else {
-
-        if (pCodPasillo < r -> codPasillo){
-            insertarRecursivoIzq(r -> HIzq, pNombre, pCodPasillo);
-        } else {
-            insertarRecursivoDer(r -> HDer, pNombre, pCodPasillo);
+            insertarRecursivo(r -> HDer, pNombre, pCodPasillo);
         }
     }
 }
@@ -86,7 +73,7 @@ bool ArbolBB::existeCodigo(int pCodPasillo) {
     }
 }
 
-bool ArbolBB::existeCodigoRecursivo(int pCodPasillo, NodoBB *r) {
+bool ArbolBB::existeCodigoRecursivo(int pCodPasillo, NodoBB *&r) {
 
     if (r == NULL)
         return false;
@@ -116,7 +103,7 @@ void ArbolBB::insertarProducto(string pNombre, int pCodPasillo, int pCodProducto
      }
 }
 
-void ArbolBB::insertarProductoRecursivo(NodoBB *r, string pNombre, int pCodPasillo, int pCodProducto) {
+void ArbolBB::insertarProductoRecursivo(NodoBB *&r, string pNombre, int pCodPasillo, int pCodProducto) {
 
     if (r -> codPasillo == pCodPasillo) {
         r -> productos.insertar(pNombre, pCodProducto);
@@ -141,7 +128,7 @@ void ArbolBB::insertarMarca(string pNombre, int pCodPasillo, int pCodProducto, i
 	}
 }
 
-void ArbolBB::insertarMarcaRecursivo(NodoBB *r, string pNombre, int pCodPasillo, int pCodProducto, int pCodMarca, int pCantidad, float pPrecio) {
+void ArbolBB::insertarMarcaRecursivo(NodoBB *&r, string pNombre, int pCodPasillo, int pCodProducto, int pCodMarca, int pCantidad, float pPrecio) {
 	
 	if (r -> codPasillo == pCodPasillo) {
 		r -> productos.insertarMarca(pNombre, pCodProducto, pCodMarca, pCantidad, pPrecio);
@@ -164,7 +151,7 @@ void ArbolBB::mostrarPasillos() {
 	}
 }
 
-void ArbolBB::mostrarPasillosRecursivo(NodoBB *r) {
+void ArbolBB::mostrarPasillosRecursivo(NodoBB *&r) {
 	
 	if (r != NULL) {
 		
@@ -187,7 +174,7 @@ void ArbolBB::mostrarProductos(int pCodPasillo) {
 	}
 }
 
-void ArbolBB::mostrarProductosRecursivo(NodoBB *r, int pCodPasillo) {
+void ArbolBB::mostrarProductosRecursivo(NodoBB *&r, int pCodPasillo) {
 	
 	if (r -> codPasillo == pCodPasillo) {
 		r -> productos.mostrarProductos();
@@ -213,7 +200,7 @@ void ArbolBB::mostrarMarcas(int pCodPasillo, int pCodProducto) {
 	}
 }
 
-void ArbolBB::mostrarMarcasRecursivo(NodoBB *r, int pCodPasillo, int pCodProducto) {
+void ArbolBB::mostrarMarcasRecursivo(NodoBB *&r, int pCodPasillo, int pCodProducto) {
 	
 	if (r -> codPasillo == pCodPasillo) {
 		r -> productos.mostrarMarcas(pCodProducto);
@@ -223,5 +210,25 @@ void ArbolBB::mostrarMarcasRecursivo(NodoBB *r, int pCodPasillo, int pCodProduct
 		} else {
 			mostrarMarcasRecursivo(r -> HDer, pCodPasillo, pCodProducto);
 		}
+	}
+}
+
+void ArbolBB::mostrar() {
+	
+	if (raiz != NULL) {
+		mostrarRecursivo(raiz -> HIzq);
+		cout << raiz -> codPasillo << " " << raiz -> nombre << endl;
+		mostrarProductos(raiz -> codPasillo);
+		mostrarRecursivo(raiz -> HDer);
+	}
+}
+
+void ArbolBB::mostrarRecursivo(NodoBB *&r) {
+	
+	if (r != NULL) {
+		mostrarRecursivo(r -> HIzq);
+		cout << r -> codPasillo << " " << r -> nombre << endl;
+		r -> productos.mostrar();
+		mostrarRecursivo(r -> HDer);
 	}
 }

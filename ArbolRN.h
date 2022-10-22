@@ -15,14 +15,15 @@ class ArbolRN {
         ArbolRN() {raiz = NULL;}
 
         void insertar(string pNombre, int pCodMarca, int pCantidad, float pPrecio);
-        void insertarRecursivoIzq(NodoRN *r,string pNombre, int pCodMarca,int pCantidad, float pPrecio);
-        void insertarRecursivoDer(NodoRN *r,string pNombre, int pCodMarca,int pCantidad, float pPrecio);
+        void insertarRecursivo(NodoRN *&r,string pNombre, int pCodMarca,int pCantidad, float pPrecio);
         void podar();
-        void podarRecursivo(NodoRN *raiz);
+        void podarRecursivo(NodoRN *&r);
         bool existeCodigo(int pCodPasillo);
-        bool existeCodigoRecursivo(int pCodPasillo, NodoRN *raiz);
+        bool existeCodigoRecursivo(int pCodPasillo, NodoRN *&r);
         void mostrar();
-        void mostrarRecursivo(NodoRN *r);
+        void mostrarRecursivo(NodoRN *&r);
+        void mostrarMarcas();
+        void mostrarMarcasRecursivo(NodoRN *&r);
         
     friend class NodoAVL;
 };
