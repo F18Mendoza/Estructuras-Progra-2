@@ -201,7 +201,7 @@ int main() {
 //-------------------------------------------- Lectura de archivos txt	
 
 	ArbolBB supermercado;
-	string linea, codigoPasillo, nombrePasillo, codigoProducto, nombreProducto, codigoMarca, nombreMarca, cantidadMarca, precioMarca;
+	string linea, codigoPasillo, nombrePasillo, codigoProducto, nombreProducto, codigoMarca, nombreMarca, cantidadMarca, precioMarca, cantidadStock, canastaBasica;
 	
 	ifstream pasillos("Pasillos.txt");
 	while(!pasillos.eof()) {
@@ -240,6 +240,21 @@ int main() {
 		supermercado.insertarMarca(nombreMarca, stoi(codigoPasillo), stoi(codigoProducto), stoi(codigoMarca), stoi(cantidadMarca), stof(precioMarca));
 	}
 	marcas.close();
+	
+	ifstream inventario("Inventario.txt");
+	while (!inventario.eof()) {
+		
+		getline(inventario, linea);
+		stringstream input_stringstream(linea);
+		getline(input_stringstream, codigoPasillo, ';');
+		getline(input_stringstream, codigoProducto, ';');
+		getline(input_stringstream, codigoMarca, ';');
+		getline(input_stringstream, nombreMarca, ';');
+		getline(input_stringstream, cantidadStock, ';');
+		getline(input_stringstream, canastaBasica, ';');
+		supermercado.insertarInventario(nombreMarca, stoi(codigoPasillo), stoi(codigoProducto), stoi(codigoMarca), stoi(cantidadStock), stoi(canastaBasica));
+	}
+	inventario.close();
 
 //------------------------LECTURA DE CLIENTES -----------------------------------
 
@@ -356,9 +371,7 @@ int main() {
 				cout << "-------Opcion Invalida-----------\n" << endl;
 		}	
 	}//*/
-	
-	supermercado.mostrar();
-	
+	supermercado.mostrarInventario();
 	supermercado.podar();
 	
 	cout << "Hola" <<endl;
