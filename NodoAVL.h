@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "ArbolRN.h"
+#include "ArbolAA.h"
 
 class NodoAVL {
 
@@ -12,6 +13,7 @@ class NodoAVL {
         NodoAVL *HIzq;
         NodoAVL *HDer;
         ArbolRN marcas;
+        ArbolAA inventario;
 
     public:
         NodoAVL(std::string pNombre, int pCodProducto) {

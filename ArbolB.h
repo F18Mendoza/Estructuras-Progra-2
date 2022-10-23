@@ -14,24 +14,21 @@ class ArbolB {
     public:
         ArbolB() {raiz = NULL;}
 
+		bool vacio() {return raiz == NULL;}
         void insertar(int pCedula, string pNombre, int pTelefono, string pCorreo);
-        void insertarRecursivoIzq(NodoB *r, int pCedula, string pNombre, int pTelefono, string pCorreo);
-        void insertarRecursivoDer(NodoB *r, int pCedula, string pNombre, int pTelefono, string pCorreo);
+        void insertarRecursivo(NodoB *&r, int pCedula, string pNombre, int pTelefono, string pCorreo);
         void insertar(int pAdmin, string pNombre);
-        void insertarRecursivoIzq(NodoB *r, int pAdmin, string pNombre);
-        void insertarRecursivoDer(NodoB *r, int pAdmin, string pNombre);
+        void insertarRecursivo(NodoB *&r, int pAdmin, string pNombre);
         void podar();
-        void podarRecursivo(NodoB *raiz);
+        void podarRecursivo(NodoB *&r);
         bool existeCedula(int pCedula);
-        bool existeCedulaRecursivo(int pCedula, NodoB *raiz);
+        bool existeCedulaRecursivo(int pCedula, NodoB *&r);
         bool existeAdmin(int pAdmin);
-        bool existeAdminRecursivo(int pAdmin, NodoB *raiz);
+        bool existeAdminRecursivo(int pAdmin, NodoB *&r);
         void mostrar();
-        void mostrarRecursivo(NodoB *raiz);
+        void mostrarRecursivo(NodoB *&r);
         void mostrarAdmin();
-        void mostrarAdminRecursivo(NodoB *raiz);
-        
-        friend class BaseDeDatos;
+        void mostrarAdminRecursivo(NodoB *&r);
 
 };
 

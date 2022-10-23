@@ -8,17 +8,17 @@ class NodoAA {
     private:
         std::string nombre;
         int codMarca;
-        int cantidadStock;
-        int canasta;
+        int stock;
+        bool canasta;
         NodoAA *HIzq;
         NodoAA *HDer;
 
     public:
-        NodoAA(std::string pNombre, int pCodMarca, int pCantidad, int pCanasta) {
+        NodoAA(std::string pNombre, int pCodMarca, int pStock, bool pCanasta) {
 
             nombre = pNombre;
             codMarca = pCodMarca;
-            cantidadStock = pCantidad;
+            stock = pStock;
             canasta = pCanasta;
             HIzq = NULL;
             HDer = NULL;

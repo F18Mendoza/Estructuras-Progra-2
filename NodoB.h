@@ -6,18 +6,16 @@
 
 class NodoB {
 
-
-    public:
-    	
-    	std::string nombre;
+	private:
+		std::string nombre;
         std::string correo;
         int cedula;
         int telefono;
         int codAdmin;
         NodoB *HIzq;
         NodoB *HDer;
-        
-        
+
+    public:        
         NodoB(int pCedula, std::string pNombre, int pTelefono, std::string pCorreo) {
 
             nombre = pNombre;
@@ -37,8 +35,6 @@ class NodoB {
 		}
 
     friend class ArbolB;
-    friend class Main;
-    friend class BaseDeDatos;
 };
 
 #endif
