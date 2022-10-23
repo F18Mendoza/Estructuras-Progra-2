@@ -148,6 +148,32 @@ bool ArbolAVL::existeCodigoRecursivo(int pCodProducto, NodoAVL *&r) {
     }
 }
 
+bool ArbolAVL::existeMarca(int pCodProducto, int pCodMarca) {
+	
+	if (raiz -> codProducto == pCodProducto) {
+		return raiz -> marcas.existeCodigo(pCodMarca);
+	} else {
+		if (pCodProducto < raiz -> codProducto) {
+			return existeMarcaRecursivo(pCodProducto, pCodMarca, raiz -> HIzq);
+		} else {
+			return existeMarcaRecursivo(pCodProducto, pCodMarca, raiz -> HDer);
+		}
+	}
+}
+
+bool ArbolAVL::existeMarcaRecursivo(int pCodProducto, int pCodMarca, NodoAVL *&r) {
+	
+	if (r -> codProducto == pCodProducto) {
+		return r -> marcas.existeCodigo(pCodMarca);
+	} else {
+		if (pCodProducto < r -> codProducto) {
+			return existeMarcaRecursivo(pCodProducto, pCodMarca, r -> HIzq);
+		} else {
+			return existeMarcaRecursivo(pCodProducto, pCodMarca, r -> HDer);
+		}
+	}
+}
+
 void ArbolAVL::mostrarProductos() {
 	
 	if (raiz != NULL) {
@@ -194,7 +220,7 @@ void ArbolAVL::mostrarMarcasRecursivo(NodoAVL *&r, int pCodProducto) {
 
 void ArbolAVL::mostrar() {
 	
-	if (raiz != NULL) {
+	if (raiz != NULL && !raiz -> marcas.vacio()) {
 		cout << raiz -> codProducto << " " << raiz -> nombre << endl;
 		raiz -> marcas.mostrar();
 		mostrarRecursivo(raiz -> HIzq);
@@ -204,7 +230,7 @@ void ArbolAVL::mostrar() {
 
 void ArbolAVL::mostrarRecursivo(NodoAVL *&r) {
 	
-	if (r != NULL) {
+	if (r != NULL && !r -> marcas.vacio()) {
 		cout << r -> codProducto << " " << r -> nombre << endl;
 		r -> marcas.mostrar();
 		mostrarRecursivo(r -> HIzq);
@@ -229,5 +255,31 @@ void ArbolAVL::mostrarInventarioRecursivo(NodoAVL *&r) {
 		r -> inventario.mostrar();
 		mostrarInventarioRecursivo(r -> HIzq);
 		mostrarInventarioRecursivo(r -> HDer);
+	}
+}
+
+void ArbolAVL::mostrarPrecio(int pCodProducto, int pCodMarca) {
+	
+	if (raiz -> codProducto == pCodProducto) {
+		raiz -> marcas.mostrarPrecio(pCodMarca);
+	} else {
+		if (pCodProducto < raiz -> codProducto) {
+			mostrarPrecioRecursivo(pCodProducto, pCodMarca, raiz -> HIzq);
+		} else {
+			mostrarPrecioRecursivo(pCodProducto, pCodMarca, raiz -> HDer);
+		}
+	}
+}
+
+void ArbolAVL::mostrarPrecioRecursivo(int pCodProducto, int pCodMarca, NodoAVL *&r) {
+	
+	if (r -> codProducto == pCodProducto) {
+		r -> marcas.mostrarPrecio(pCodMarca);
+	} else {
+		if (pCodProducto < r -> codProducto) {
+			mostrarPrecioRecursivo(pCodProducto, pCodMarca, r -> HIzq);
+		} else {
+			mostrarPrecioRecursivo(pCodProducto, pCodMarca, r -> HDer);
+		}
 	}
 }

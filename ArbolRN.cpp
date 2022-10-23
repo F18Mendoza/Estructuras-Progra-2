@@ -123,3 +123,38 @@ void ArbolRN::mostrarRecursivo(NodoRN *&r) {
 		mostrarRecursivo(r -> HDer);
 	}
 }
+
+void ArbolRN::mostrarPrecio(int pCodMarca) {
+	
+	if (raiz -> codMarca == pCodMarca) {
+		cout << "Nombre: " << raiz -> nombre << " Precio: " << raiz -> precio << endl;
+	} else {
+		if (pCodMarca < raiz -> codMarca) {
+			mostrarPrecioRecursivo(pCodMarca, raiz -> HIzq);
+		} else {
+			mostrarPrecioRecursivo(pCodMarca, raiz -> HDer);
+		}
+	}
+}
+
+void ArbolRN::mostrarPrecioRecursivo(int pCodMarca, NodoRN *&r) {
+	
+	if (r -> codMarca == pCodMarca) {
+		cout << "Nombre: " << raiz -> nombre << " Precio: " << raiz -> precio << endl;
+	} else {
+		if (pCodMarca < r -> codMarca) {
+			mostrarPrecioRecursivo(pCodMarca, r -> HIzq);
+		} else {
+			mostrarPrecioRecursivo(pCodMarca, r -> HDer);
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
