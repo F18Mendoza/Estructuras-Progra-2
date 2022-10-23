@@ -14,6 +14,7 @@ class ArbolRN {
     public:
         ArbolRN() {raiz = NULL;}
 
+		bool vacio() {return raiz == NULL;}
         void insertar(string pNombre, int pCodMarca, int pCantidad, float pPrecio);
         void insertarRecursivo(NodoRN *&r,string pNombre, int pCodMarca,int pCantidad, float pPrecio);
         void podar();
