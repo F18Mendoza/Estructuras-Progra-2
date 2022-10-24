@@ -157,8 +157,9 @@ void modificarCosas(ArbolBB &supermercado){
 	char opcion;
 	int codigoPasillo, codigoProducto, codigoMarca;
 	string nuevoNombre;
+	float nuevoPrecio;
 	
-		while (opcion != '4'){
+	while (opcion != '4'){
 		
 	
 		cout << " _____________________________________________________________" << endl;
@@ -187,9 +188,18 @@ void modificarCosas(ArbolBB &supermercado){
 						cout << "Ingrese el codigo de la marca a la que le desea modificar el precio: " << endl;
 						cin >> codigoMarca;
 						if (supermercado.existeMarca(codigoPasillo, codigoProducto, codigoMarca)){
-							//supermercado.modificarMarcaNombre()
-						}
+							cout << "Ingrese el nuevo precio para la marca seleccionada: " << endl;
+							cin >> nuevoPrecio;
+							supermercado.modificarMarcaPrecio(nuevoPrecio, codigoPasillo, codigoProducto, codigoMarca);
+							break;
+						}else{
+							cout << "El codigo de marca no existe" << endl;							
+						}						
+					}else{
+						cout << "El codigo de producto ingresado no existe" << endl;
 					}
+				}else{
+					cout << "El codigo de pasillo ingresado no existe" << endl;
 				}
 				break;
 				
@@ -206,18 +216,27 @@ void modificarCosas(ArbolBB &supermercado){
 							cout << "Ingrese el nombre por el que desea cambiar el nombre actual: " << endl;
 							cin >> nuevoNombre;
 							supermercado.modificarMarcaNombre(nuevoNombre, codigoPasillo, codigoProducto, codigoMarca);
+							break;
+						}else{
+							cout << "El codigo de marca no existe" << endl;
 						}
+					}else{
+						cout << "El codigo de producto ingresado no existe" << endl;
 					}
+				}else{
+					cout << "El codigo de pasillo ingresado no existe" << endl;
 				}
 				break;
 			
-		}
-		
-		
-		}
-		
-		
-		
+			case '4':
+				cout << "Volviendo al menu anterior" << endl;
+				break;
+				
+			default:
+				cout << "Opcion invalida" << endl;
+			
+		}		
+	}	
 }
 
 void baseDeDatos(ArbolB &clientes, int &descuento, ArbolBB &supermercado){
@@ -358,7 +377,7 @@ void reportes(ArbolBB &supermercado, ArbolB &clientes){
 		cout << "| 15. Salir                                                   |" << endl;                       
 		cout << "|_____________________________________________________________|" << endl;
 		
-		cout << "Seleccione una opcion: \n" << endl;
+		cout << "Seleccione una opcion: " ;
 		cin >> seleccion;
 		
 		switch (seleccion){
@@ -490,7 +509,7 @@ void menuAdministrador(ArbolB &clientes, int &descuento, ArbolBB &supermercado){
 				cout << "Verificar Inventarios" << endl;
 				break;
 			case '5':
-				cout << "Reportes" << endl;
+				//cout << "Reportes" << endl;
 				reportes(supermercado, clientes);
 				break;
 			case '6':

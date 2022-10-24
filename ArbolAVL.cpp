@@ -313,3 +313,32 @@ void ArbolAVL::modificarMarcaNombreRecursivo(NodoAVL *&r, string pNombre, int pC
 		}
 	}
 }
+
+void ArbolAVL::modificarMarcaPrecio (float pPrecio, int pCodProducto, int pCodMarca){
+	
+	if (raiz -> codProducto == pCodProducto) {
+		raiz -> marcas.modificarMarcaPrecio(pPrecio, pCodMarca);
+
+	} else {
+		if (pCodProducto < raiz -> codProducto) {
+			modificarMarcaPrecioRecursivo(raiz -> HIzq, pPrecio, pCodProducto, pCodMarca);
+		} else {
+			modificarMarcaPrecioRecursivo(raiz -> HDer, pPrecio, pCodProducto, pCodMarca);
+		}
+	}
+}
+
+
+void ArbolAVL::modificarMarcaPrecioRecursivo(NodoAVL *&r, float pPrecio, int pCodProducto, int pCodMarca){
+	
+	if (r -> codProducto == pCodProducto) {
+		r -> marcas.modificarMarcaPrecio(pPrecio, pCodMarca);
+
+	} else {
+		if (pCodProducto < r -> codProducto) {
+			modificarMarcaPrecioRecursivo(r -> HIzq, pPrecio, pCodProducto, pCodMarca);
+		} else {
+			modificarMarcaPrecioRecursivo(r -> HDer, pPrecio, pCodProducto, pCodMarca);
+		}
+	}
+}

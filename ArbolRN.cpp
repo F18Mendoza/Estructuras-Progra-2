@@ -178,3 +178,30 @@ void ArbolRN::modificarMarcaNombreRecursivo(NodoRN *&r, string pNombre, int pCod
 		}
 	}
 }
+
+void ArbolRN::modificarMarcaPrecio (float pPrecio, int pCodMarca){
+	
+	if (raiz -> codMarca == pCodMarca) {
+		raiz -> precio = pPrecio;
+	} else {
+		if (pCodMarca < raiz -> codMarca) {
+			modificarMarcaPrecioRecursivo(raiz -> HIzq, pPrecio, pCodMarca);
+		} else {
+			modificarMarcaPrecioRecursivo(raiz -> HDer, pPrecio, pCodMarca);
+		}
+	}
+}
+
+
+void ArbolRN::modificarMarcaPrecioRecursivo(NodoRN *&r, float pPrecio, int pCodMarca){
+	
+	if (r -> codMarca == pCodMarca) {
+		r-> precio = pPrecio;
+	} else {
+		if (pCodMarca < r -> codMarca) {
+			modificarMarcaPrecioRecursivo(r -> HIzq, pPrecio, pCodMarca);
+		} else {
+			modificarMarcaPrecioRecursivo(r -> HDer, pPrecio, pCodMarca);
+		}
+	}
+}

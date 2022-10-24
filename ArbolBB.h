@@ -44,6 +44,8 @@ class ArbolBB {
         void mostrarPrecioRecursivo(int pCodPasillo, int pCodProducto, int pCodMarca, NodoBB *&r);
         void modificarMarcaNombre (string pNombre, int pCodPasillo, int pCodProducto, int pCodMarca);
         void modificarMarcaNombreRecursivo(NodoBB *&r, string pNombre, int pCodPasillo, int pCodProducto, int pCodMarca);
+        void modificarMarcaPrecio (float pPrecio, int pCodPasillo, int pCodProducto, int pCodMarca);
+        void modificarMarcaPrecioRecursivo(NodoBB *&r, float pPrecio, int pCodPasillo, int pCodProducto, int pCodMarca);
 };
 
 #endif
