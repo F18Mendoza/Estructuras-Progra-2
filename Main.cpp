@@ -8,6 +8,20 @@
 
 using namespace std;
 
+//--------------------------------------METODOS DE REPORTES-----------------------------------------
+
+void inventarioDeTienda(ArbolBB&supermercado) {
+
+	ofstream file;
+	file.open("InventarioDeLaTienda.txt");
+	file << "--- Inventario de la Tienda ---" << endl;
+	file << supermercado.mostrarInventario();
+	file.close();
+}
+
+
+
+//------------------------------------------------------------------------------------------------------------------------
 
 void menuClientesRegistrado(int &descuento, ArbolBB &supermercado){
 	
@@ -252,7 +266,7 @@ void baseDeDatos(ArbolB &clientes, int &descuento, ArbolBB &supermercado){
 	}	
 }
 
-void reportes(){
+void reportes(ArbolBB &supermercado){
 	
 	int seleccion;
 	
@@ -336,6 +350,8 @@ void reportes(){
 				
 			case 14:
 				cout << "sale el inventario del supermercado" << endl;
+				supermercado.mostrarInventario();
+				inventarioDeTienda(supermercado);
 				break;
 				
 			case 15:
@@ -387,7 +403,7 @@ void menuAdministrador(ArbolB &clientes, int &descuento, ArbolBB &supermercado){
 				break;
 			case '5':
 				cout << "Reportes" << endl;
-				reportes();
+				reportes(supermercado);
 				break;
 			case '6':
 				cout << "Volviendo al menu anterior." << endl;	

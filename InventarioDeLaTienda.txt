@@ -1,0 +1,2 @@
+--- Inventario de la Tienda ---
+Esto medio funciona?
