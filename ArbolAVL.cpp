@@ -289,6 +289,7 @@ void ArbolAVL::modificarMarcaNombre (string pNombre, int pCodProducto, int pCodM
 	
 	if (raiz -> codProducto == pCodProducto) {
 		raiz -> marcas.modificarMarcaNombre(pNombre, pCodMarca);
+		raiz -> inventario.modificarMarcaNombre (pNombre, pCodMarca);
 	} else {
 		if (pCodProducto < raiz -> codProducto) {
 			modificarMarcaNombreRecursivo(raiz -> HIzq, pNombre, pCodProducto, pCodMarca);
@@ -303,6 +304,7 @@ void ArbolAVL::modificarMarcaNombreRecursivo(NodoAVL *&r, string pNombre, int pC
 	
 	if (r -> codProducto == pCodProducto) {
 		r -> marcas.modificarMarcaNombre(pNombre, pCodMarca);
+		r -> inventario.modificarMarcaNombre (pNombre, pCodMarca);
 	} else {
 		if (pCodProducto < r -> codProducto) {
 			modificarMarcaNombreRecursivo(r -> HIzq, pNombre, pCodProducto, pCodMarca);
