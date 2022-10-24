@@ -8,11 +8,16 @@
 
 using namespace std;
 
+//--------------------------------------METODOS DE REPORTES-----------------------------------------
+
+
+
+//------------------------------------------------------------------------------------------------------------------------
 
 void menuClientesRegistrado(int &descuento, ArbolBB &supermercado){
 	
 	char clientes;
-	int codigoPasillo, codigoProducto, codigoMarca;
+	int codigoPasillo, codigoProducto, codigoMarca, cantidad;
 	while (clientes != '5'){
 		cout << " _____________________________________________________________" << endl;
 		cout << "|                   MENU CLIENTES REGISTRADOS                 |" << endl;
@@ -65,7 +70,68 @@ void menuClientesRegistrado(int &descuento, ArbolBB &supermercado){
 				break;
 				
 			case '4':
-				cout << "Se compra" << endl;
+				int continuar;
+				while (continuar == 1) {
+					supermercado.mostrarPasillos();
+					cout << endl << "Ingrese el codigo del pasillo que desea visitar: ";
+					cin >> codigoPasillo;
+					if (codigoPasillo < 0) {
+						break;
+					}
+					if (supermercado.existeCodigo(codigoPasillo)) {
+						supermercado.mostrarProductos(codigoPasillo);
+						cout << endl << "Ingrese el codigo del producto que desea visitar: ";
+						cin >> codigoProducto;
+						if (codigoProducto < 0) {
+							break;
+						}
+						if (supermercado.existeProducto(codigoPasillo, codigoProducto)) {
+							supermercado.mostrarMarcas(codigoPasillo, codigoProducto);
+							cout << endl << "Ingrese el codigo de la marca que desea agregar a su carrito: ";
+							cin >> codigoMarca;
+							if (codigoMarca < 0) {
+								break;
+							}
+							if (supermercado.existeMarca(codigoPasillo, codigoProducto, codigoMarca)) {
+								cout << endl << "Ingrese la cantidad que desea tomar: ";
+								cin >> cantidad;
+								if (cantidad > 0) {
+									int opcion = 0;
+									while (opcion != 3 && cantidad > 0 && !supermercado.verificarCantidad(codigoPasillo, codigoProducto, codigoMarca, cantidad)) {
+										cout << endl << "La cantidad que ingreso excede la disponible." << endl;
+										cout << "Si desea tomar todos los articulos disponibles digite 1." << endl;
+										cout << "Si desea ingresar otra cantidad diferente digite 2." << endl;
+										cout << "Si no desea tomar ningun articulo digite 3." << endl;
+										cout << "Seleccion: ";
+										cin >> opcion;
+										if (opcion == 1) {
+											cantidad = supermercado.cantidadMaxima(codigoPasillo, codigoProducto, codigoMarca);
+											break;
+										}
+										if (opcion == 2) {
+											cout << endl << "Ingrese la cantidad que desea tomar: ";
+											cin >> cantidad;
+										}
+									}
+									if (opcion == 3) {
+										break;
+									}
+									
+								} else {
+									if (cantidad == 0) {
+										cout << "No se tomaran articulos." << endl;
+									} else {
+										break;
+									}
+								}
+							}
+						}
+					}
+					cout << endl << "Si desea continuar comprando digite 1." << endl;
+					cout << "Si no desea continuar digite 2." << endl;
+					cout << "Seleccion: ";
+					cin >> continuar;
+				}
 				break;
 				
 			case '5': 
@@ -81,6 +147,8 @@ void menuClientesNoRegistrado(ArbolBB &supermercado){
 	
 	char clientes;
 	int codigoPasillo, codigoProducto, codigoMarca;
+
+	
 	while (clientes != '5') {
 		cout << " _____________________________________________________________" << endl;
 		cout << "|                MENU CLIENTES NO REGISTRADOS                 |" << endl;
@@ -145,6 +213,93 @@ void menuClientesNoRegistrado(ArbolBB &supermercado){
 	}
 }
 
+void modificarCosas(ArbolBB &supermercado){
+	
+	char opcion;
+	int codigoPasillo, codigoProducto, codigoMarca;
+	string nuevoNombre;
+	float nuevoPrecio;
+	
+	while (opcion != '4'){
+		
+	
+		cout << " _____________________________________________________________" << endl;
+		cout << "|                   MENU DE MODIFICACIONES                    |" << endl;
+		cout << "|-------------------------------------------------------------|" << endl;
+		cout << "| 1. Cambiar codigo de marca                                  |" << endl;
+		cout << "| 2. Modificar el precio de una marca                         |" << endl;
+		cout << "| 3. Modificar el nombre de una marca                         |" << endl;
+		cout << "| 4. Salir                                                    |" << endl;
+		cout << "|_____________________________________________________________|" << endl;
+		cout << "Seleccione una opcion: ";
+		cin >> opcion;
+		
+		switch (opcion){
+			
+			case '1':
+				break;
+				
+			case '2':
+				cout << "Ingrese el codigo de pasillo: " << endl;
+				cin >> codigoPasillo;
+				if (supermercado.existeCodigo(codigoPasillo)){
+					cout << "Ingrese el codigo del producto: " << endl;
+					cin >> codigoProducto;
+					if (supermercado.existeProducto(codigoPasillo, codigoProducto)){
+						cout << "Ingrese el codigo de la marca a la que le desea modificar el precio: " << endl;
+						cin >> codigoMarca;
+						if (supermercado.existeMarca(codigoPasillo, codigoProducto, codigoMarca)){
+							cout << "Ingrese el nuevo precio para la marca seleccionada: " << endl;
+							cin >> nuevoPrecio;
+							supermercado.modificarMarcaPrecio(nuevoPrecio, codigoPasillo, codigoProducto, codigoMarca);
+							break;
+						}else{
+							cout << "El codigo de marca no existe" << endl;							
+						}						
+					}else{
+						cout << "El codigo de producto ingresado no existe" << endl;
+					}
+				}else{
+					cout << "El codigo de pasillo ingresado no existe" << endl;
+				}
+				break;
+				
+			case '3':
+				cout << "Ingrese el codigo de pasillo: " << endl;
+				cin >> codigoPasillo;
+				if (supermercado.existeCodigo(codigoPasillo)){
+					cout << "Ingrese el codigo del producto: " << endl;
+					cin >> codigoProducto;
+					if (supermercado.existeProducto(codigoPasillo, codigoProducto)){
+						cout << "Ingrese el codigo de la marca a la que le desea modificar el nombre: " << endl;
+						cin >> codigoMarca;
+						if (supermercado.existeMarca(codigoPasillo, codigoProducto, codigoMarca)){
+							cout << "Ingrese el nombre por el que desea cambiar el nombre actual: " << endl;
+							cin >> nuevoNombre;
+							supermercado.modificarMarcaNombre(nuevoNombre, codigoPasillo, codigoProducto, codigoMarca);
+							break;
+						}else{
+							cout << "El codigo de marca no existe" << endl;
+						}
+					}else{
+						cout << "El codigo de producto ingresado no existe" << endl;
+					}
+				}else{
+					cout << "El codigo de pasillo ingresado no existe" << endl;
+				}
+				break;
+			
+			case '4':
+				cout << "Volviendo al menu anterior" << endl;
+				break;
+				
+			default:
+				cout << "Opcion invalida" << endl;
+			
+		}		
+	}	
+}
+
 void baseDeDatos(ArbolB &clientes, int &descuento, ArbolBB &supermercado){
 	
 	char datos;
@@ -193,6 +348,7 @@ void baseDeDatos(ArbolB &clientes, int &descuento, ArbolBB &supermercado){
 				
 			case '2':
 				cout << "Modificar cosas" << endl;
+				modificarCosas(supermercado);
 				break;
 				
 			case '3':
@@ -218,6 +374,7 @@ void baseDeDatos(ArbolB &clientes, int &descuento, ArbolBB &supermercado){
 				break;
 				
 			case '4':
+				cout << "Para los clientes que han facturado 4 veces o más... " << endl;
 				cout << "El descuento actual es del " << descuento << "%." << endl;
 				break;
 				
@@ -239,7 +396,9 @@ void baseDeDatos(ArbolB &clientes, int &descuento, ArbolBB &supermercado){
 					cout << "Ingrese el correo del cliente: ";
 					cin >> correoCliente;
 					clientes.insertar(cedCliente, nomCliente, celCliente, correoCliente);
+					break;
 				}
+				cout << "Ya hay un cliente con esa cedula, accion invalida" << endl;
 				break;
 				
 			case '7':
@@ -250,6 +409,131 @@ void baseDeDatos(ArbolB &clientes, int &descuento, ArbolBB &supermercado){
 				cout << "---------Opcion Invalida-----------" << endl;		
 		}
 	}	
+}
+
+void reportes(ArbolBB &supermercado, ArbolB &clientes){
+	
+	int seleccion;
+	int pasilloCliente;
+	int productoCliente;
+	
+	while (seleccion != 15){
+		cout << " -------------------------------------------------------------" << endl;
+		cout << "|                      MENU REPORTES                          |" << endl;
+		cout << "|-------------------------------------------------------------|" << endl;
+		cout << "| 1. Pasillo mas visitado                                     |" << endl;
+		cout << "| 2. Pasillo menos visitado                                   |" << endl;
+		cout << "| 3. Productos por pasillo mas vendidos                       |" << endl;
+		cout << "| 4. Marcas mas vendidas                                      |" << endl;
+		cout << "| 5. Cliente que mas compro                                   |" << endl; 
+		cout << "| 6. Cliente que menos compro                                 |" << endl; 
+		cout << "| 7. Producto que mas se cargo en gondolas                    |" << endl;
+		cout << "| 8. Cliente que mas facturo                                  |" << endl;
+		cout << "| 9. Marcas de un producto                                    |" << endl;
+		cout << "| 10. Factura de mayor monto                                  |" << endl;
+		cout << "| 11. Productos de un pasillo                                 |" << endl; 
+		cout << "| 12. Clientes del supermercado                               |" << endl; 
+		cout << "| 13. Pasillos del supermercado                               |" << endl;
+		cout << "| 14. Inventario dei supermercado                             |" << endl; 
+		cout << "| 15. Salir                                                   |" << endl;                       
+		cout << "|_____________________________________________________________|" << endl;
+		
+		cout << "Seleccione una opcion: " ;
+		cin >> seleccion;
+		
+		switch (seleccion){
+			
+			case 1:
+				cout << "sale pasillo mas visitado" << endl;
+				break;
+			
+			case 2:
+				cout << "sale pasillo menos visitado" << endl;
+				break;
+				
+			case 3:
+				cout << "salen productos mas vendidos por pasillo" << endl;
+				break;
+				
+			case 4:
+				cout << "salen marcas mas vendidas" << endl;
+				break;
+				
+			case 5:
+				cout << "sale cliente que mas compro" << endl;
+				break;
+				
+			case 6:
+				cout << "sale cliente que menos compro" << endl;
+				break;
+		
+			case 7: 
+				cout << "sale producto mas cargado en gondolas" << endl;
+				break;
+				
+			case 8:
+				cout << "sale cliente que mas facturo" << endl;
+				break;
+				
+			case 9:
+				cout << "Marcas que hay de un producto\n" << endl;
+				cout << "Por favor ingrese el pasillo: " << endl;
+				cin >> pasilloCliente;
+				if (supermercado.existeCodigo(pasilloCliente)){
+					cout << "Por favor ingrese el producto: " << endl;
+					cin >> productoCliente;
+					if (supermercado.existeProducto(pasilloCliente, productoCliente)){					
+						supermercado.mostrarMarcas(pasilloCliente, productoCliente);
+						break;
+					}
+					cout << "El codigo de producto que ingreso no pertenece a ninguno disponible" << endl;
+					break;									
+				}
+				cout << "El codigo de pasillo que ingreso no corresponde a ninguno disponible" << endl;			
+				break;
+			
+			case 10:
+				cout << "sale la factura de mayor monto" << endl;
+				break;
+				
+			case 11: 
+				cout << "Productos de un pasillo\n" << endl;
+				cout << "De que pasillo desearia consultar los productos: " << endl;
+				cin >> pasilloCliente;
+				if (supermercado.existeCodigo(pasilloCliente)){
+					supermercado.mostrarProductos(pasilloCliente);
+					break;
+				}
+				cout << "El pasillo ingresado no corresponde a ninguno disponible\n" << endl;
+				break;
+							
+			case 12:
+				cout << "Los clientes del supermercado\n" << endl;
+				clientes.mostrar();
+				break;
+			
+			case 13:
+				cout << "Los pasillos del supermercado\n" << endl;
+				supermercado.mostrarPasillos();
+				break;
+				
+			case 14:
+				cout << "El inventario del supermercado\n" << endl;
+				supermercado.mostrarInventario();
+				break;
+				
+			case 15:
+				cout << "Volviendo al menu anterior" << endl;
+				break;				
+			
+			default:
+				cout << "Opción invalida" << endl;
+				break;
+				
+		}
+		
+	
+	}
 }
 
 void menuAdministrador(ArbolB &clientes, int &descuento, ArbolBB &supermercado){
@@ -286,7 +570,8 @@ void menuAdministrador(ArbolB &clientes, int &descuento, ArbolBB &supermercado){
 				cout << "Verificar Inventarios" << endl;
 				break;
 			case '5':
-				cout << "Reportes" << endl;
+				//cout << "Reportes" << endl;
+				reportes(supermercado, clientes);
 				break;
 			case '6':
 				cout << "Volviendo al menu anterior." << endl;	
@@ -344,6 +629,8 @@ int main() {
 	}
 	marcas.close();
 	
+//---------------------------LECTURA DE INVENTARIO-------------------------------------
+	
 	ifstream inventario("Inventario.txt");
 	while (!inventario.eof()) {
 		
@@ -355,6 +642,7 @@ int main() {
 		getline(input_stringstream, nombreMarca, ';');
 		getline(input_stringstream, cantidadStock, ';');
 		getline(input_stringstream, canastaBasica, ';');
+		//cout << cantidadStock << endl;
 		supermercado.insertarInventario(nombreMarca, stoi(codigoPasillo), stoi(codigoProducto), stoi(codigoMarca), stoi(cantidadStock), stoi(canastaBasica));
 	}
 	inventario.close();

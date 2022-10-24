@@ -283,3 +283,114 @@ void ArbolAVL::mostrarPrecioRecursivo(int pCodProducto, int pCodMarca, NodoAVL *
 		}
 	}
 }
+
+
+void ArbolAVL::modificarMarcaNombre(string pNombre, int pCodProducto, int pCodMarca){
+	
+	if (raiz -> codProducto == pCodProducto) {
+		raiz -> marcas.modificarMarcaNombre(pNombre, pCodMarca);
+		raiz -> inventario.modificarMarcaNombre (pNombre, pCodMarca);
+	} else {
+		if (pCodProducto < raiz -> codProducto) {
+			modificarMarcaNombreRecursivo(raiz -> HIzq, pNombre, pCodProducto, pCodMarca);
+		} else {
+			modificarMarcaNombreRecursivo(raiz -> HDer, pNombre, pCodProducto, pCodMarca);
+		}
+	}
+}
+
+
+void ArbolAVL::modificarMarcaNombreRecursivo(NodoAVL *&r, string pNombre, int pCodProducto, int pCodMarca){
+	
+	if (r -> codProducto == pCodProducto) {
+		r -> marcas.modificarMarcaNombre(pNombre, pCodMarca);
+		r -> inventario.modificarMarcaNombre (pNombre, pCodMarca);
+	} else {
+		if (pCodProducto < r -> codProducto) {
+			modificarMarcaNombreRecursivo(r -> HIzq, pNombre, pCodProducto, pCodMarca);
+		} else {
+			modificarMarcaNombreRecursivo(r -> HDer, pNombre, pCodProducto, pCodMarca);
+		}
+	}
+}
+
+void ArbolAVL::modificarMarcaPrecio(float pPrecio, int pCodProducto, int pCodMarca){
+	
+	if (raiz -> codProducto == pCodProducto) {
+		raiz -> marcas.modificarMarcaPrecio(pPrecio, pCodMarca);
+
+	} else {
+		if (pCodProducto < raiz -> codProducto) {
+			modificarMarcaPrecioRecursivo(raiz -> HIzq, pPrecio, pCodProducto, pCodMarca);
+		} else {
+			modificarMarcaPrecioRecursivo(raiz -> HDer, pPrecio, pCodProducto, pCodMarca);
+		}
+	}
+}
+
+
+void ArbolAVL::modificarMarcaPrecioRecursivo(NodoAVL *&r, float pPrecio, int pCodProducto, int pCodMarca){
+	
+	if (r -> codProducto == pCodProducto) {
+		r -> marcas.modificarMarcaPrecio(pPrecio, pCodMarca);
+
+	} else {
+		if (pCodProducto < r -> codProducto) {
+			modificarMarcaPrecioRecursivo(r -> HIzq, pPrecio, pCodProducto, pCodMarca);
+		} else {
+			modificarMarcaPrecioRecursivo(r -> HDer, pPrecio, pCodProducto, pCodMarca);
+		}
+	}
+}
+
+bool ArbolAVL::verificarCantidad(int pCodProducto, int pCodMarca, int pCantidad) {
+	
+	if (raiz -> codProducto == pCodProducto) {
+		return raiz -> marcas.verificarCantidad(pCodMarca, pCantidad);
+	} else {
+		if (pCodProducto < raiz -> codProducto) {
+			return verificarCantidadRecursivo(raiz -> HIzq, pCodProducto, pCodMarca, pCantidad);
+		} else {
+			return verificarCantidadRecursivo(raiz -> HDer, pCodProducto, pCodMarca, pCantidad);
+		}
+	}
+}
+
+bool ArbolAVL::verificarCantidadRecursivo(NodoAVL *&r, int pCodProducto, int pCodMarca, int pCantidad) {
+	
+	if (r -> codProducto == pCodProducto) {
+		return r -> marcas.verificarCantidad(pCodMarca, pCantidad);
+	} else {
+		if (pCodProducto < r -> codProducto) {
+			return verificarCantidadRecursivo(r -> HIzq, pCodProducto, pCodMarca, pCantidad);
+		} else {
+			return verificarCantidadRecursivo(r -> HDer, pCodProducto, pCodMarca, pCantidad);
+		}
+	}
+}
+
+int ArbolAVL::cantidadMaxima(int pCodProducto, int pCodMarca) {
+	
+	if (raiz -> codProducto == pCodProducto) {
+		return raiz -> marcas.cantidadMaxima(pCodMarca);
+	} else {
+		if (pCodProducto < raiz -> codProducto) {
+			return cantidadMaximaRecursivo(raiz -> HIzq, pCodProducto, pCodMarca);
+		} else {
+			return cantidadMaximaRecursivo(raiz -> HDer, pCodProducto, pCodMarca);
+		}
+	}
+}
+
+int ArbolAVL::cantidadMaximaRecursivo(NodoAVL *&r, int pCodProducto, int pCodMarca) {
+	
+	if (r -> codProducto == pCodProducto) {
+		return r -> marcas.cantidadMaxima(pCodMarca);
+	} else {
+		if (pCodProducto < r -> codProducto) {
+			return cantidadMaximaRecursivo(r -> HIzq, pCodProducto, pCodMarca);
+		} else {
+			return cantidadMaximaRecursivo(r -> HDer, pCodProducto, pCodMarca);
+		}
+	}
+}

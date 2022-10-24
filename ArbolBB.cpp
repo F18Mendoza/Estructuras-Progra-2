@@ -192,6 +192,8 @@ void ArbolBB::insertarMarcaRecursivo(NodoBB *&r, string pNombre, int pCodPasillo
 	}
 }
 
+
+
 void ArbolBB::insertarInventario(string pNombre, int pCodPasillo, int pCodProducto, int pCodMarca, int pStock, int pCanasta) {
 	
 	if (raiz -> codPasillo == pCodPasillo) {
@@ -355,6 +357,114 @@ void ArbolBB::mostrarPrecioRecursivo(int pCodPasillo, int pCodProducto, int pCod
 			mostrarPrecioRecursivo(pCodPasillo, pCodProducto, pCodMarca, r -> HIzq);
 		} else {
 			mostrarPrecioRecursivo(pCodPasillo, pCodProducto, pCodMarca, r -> HDer);
+		}
+	}
+}
+
+
+void ArbolBB::modificarMarcaNombre (string pNombre, int pCodPasillo, int pCodProducto, int pCodMarca){
+	
+	if (raiz -> codPasillo == pCodPasillo) {
+		raiz -> productos.modificarMarcaNombre(pNombre, pCodProducto, pCodMarca);
+	} else {
+		if (pCodPasillo < raiz -> codPasillo) {
+			modificarMarcaNombreRecursivo(raiz -> HIzq, pNombre, pCodPasillo, pCodProducto, pCodMarca);
+		} else {
+			modificarMarcaNombreRecursivo(raiz -> HDer, pNombre, pCodPasillo, pCodProducto, pCodMarca);
+		}
+	}
+}
+
+
+void ArbolBB::modificarMarcaNombreRecursivo(NodoBB *&r, string pNombre, int pCodPasillo, int pCodProducto, int pCodMarca){
+	
+	if (r -> codPasillo == pCodPasillo) {
+		r -> productos.modificarMarcaNombre(pNombre, pCodProducto, pCodMarca);
+	} else {
+		if (pCodPasillo < r -> codPasillo) {
+			modificarMarcaNombreRecursivo(r -> HIzq, pNombre, pCodPasillo, pCodProducto, pCodMarca);
+		} else {
+			modificarMarcaNombreRecursivo(r -> HDer, pNombre, pCodPasillo, pCodProducto, pCodMarca);
+		}
+	}
+}
+
+
+void ArbolBB::modificarMarcaPrecio(float pPrecio, int pCodPasillo, int pCodProducto, int pCodMarca){
+	
+	if (raiz -> codPasillo == pCodPasillo) {
+		raiz -> productos.modificarMarcaPrecio(pPrecio, pCodProducto, pCodMarca);
+	} else {
+		if (pCodPasillo < raiz -> codPasillo) {
+			modificarMarcaPrecioRecursivo(raiz -> HIzq, pPrecio, pCodPasillo, pCodProducto, pCodMarca);
+		} else {
+			modificarMarcaPrecioRecursivo(raiz -> HDer, pPrecio, pCodPasillo, pCodProducto, pCodMarca);
+		}
+	}
+}
+
+
+void ArbolBB::modificarMarcaPrecioRecursivo(NodoBB *&r, float pPrecio, int pCodPasillo, int pCodProducto, int pCodMarca){
+	
+	if (r -> codPasillo == pCodPasillo) {
+		r -> productos.modificarMarcaPrecio(pPrecio, pCodProducto, pCodMarca);
+	} else {
+		if (pCodPasillo < r -> codPasillo) {
+			modificarMarcaPrecioRecursivo(r -> HIzq, pPrecio, pCodPasillo, pCodProducto, pCodMarca);
+		} else {
+			modificarMarcaPrecioRecursivo(r -> HDer, pPrecio, pCodPasillo, pCodProducto, pCodMarca);
+		}
+	}
+}
+
+bool ArbolBB::verificarCantidad(int pCodPasillo, int pCodProducto, int pCodMarca, int pCantidad) {
+	
+	if (raiz -> codPasillo == pCodPasillo) {
+		return raiz -> productos.verificarCantidad(pCodProducto, pCodMarca, pCantidad);
+	} else {
+		if (pCodPasillo < raiz -> codPasillo) {
+			return verificarCantidadRecursivo(raiz -> HIzq, pCodPasillo, pCodProducto, pCodMarca, pCantidad);
+		} else {
+			return verificarCantidadRecursivo(raiz -> HDer, pCodPasillo, pCodProducto, pCodMarca, pCantidad);
+		}
+	}
+}
+
+bool ArbolBB::verificarCantidadRecursivo(NodoBB *&r, int pCodPasillo, int pCodProducto, int pCodMarca, int pCantidad) {
+	
+	if (r -> codPasillo == pCodPasillo) {
+		return r -> productos.verificarCantidad(pCodProducto, pCodMarca, pCantidad);
+	} else {
+		if (pCodPasillo < r -> codPasillo) {
+			return verificarCantidadRecursivo(r -> HIzq, pCodPasillo, pCodProducto, pCodMarca, pCantidad);
+		} else {
+			return verificarCantidadRecursivo(r -> HDer, pCodPasillo, pCodProducto, pCodMarca, pCantidad);
+		}
+	}
+}
+
+int ArbolBB::cantidadMaxima(int pCodPasillo, int pCodProducto, int pCodMarca) {
+	
+	if (raiz -> codPasillo == pCodPasillo) {
+		return raiz -> productos.cantidadMaxima(pCodProducto, pCodMarca);
+	} else {
+		if (pCodPasillo < raiz -> codPasillo) {
+			return cantidadMaximaRecursivo(raiz -> HIzq, pCodPasillo, pCodProducto, pCodMarca);
+		} else {
+			return cantidadMaximaRecursivo(raiz -> HDer, pCodPasillo, pCodProducto, pCodMarca);
+		}
+	}
+}
+
+int ArbolBB::cantidadMaximaRecursivo(NodoBB *&r, int pCodPasillo, int pCodProducto, int pCodMarca) {
+	
+	if (r -> codPasillo == pCodPasillo) {
+		return r -> productos.cantidadMaxima(pCodProducto, pCodMarca);
+	} else {
+		if (pCodPasillo < r -> codPasillo) {
+			return cantidadMaximaRecursivo(r -> HIzq, pCodPasillo, pCodProducto, pCodMarca);
+		} else {
+			return cantidadMaximaRecursivo(r -> HDer, pCodPasillo, pCodProducto, pCodMarca);
 		}
 	}
 }

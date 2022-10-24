@@ -23,6 +23,9 @@ class ArbolAA {
 		bool existeMarcaRecursivo(NodoAA *&r, int pCodMarca);
 		void mostrar();
 		void mostrarRecursivo(NodoAA *&r);
+		void modificarMarcaNombre (string pNombre, int pCodMarca);
+        void modificarMarcaNombreRecursivo(NodoAA *&r, string pNombre, int pCodMarca);
+
 };
 
 #endif
