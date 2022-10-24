@@ -37,6 +37,8 @@ class ArbolAVL {
         void mostrarRecursivo(NodoAVL *&r);
         void mostrarPrecio(int pCodProducto, int pCodMarca);
         void mostrarPrecioRecursivo(int pCodProducto, int pCodMarca, NodoAVL *&r);
+        void modificarMarcaNombre (string pNombre, int pCodProducto, int pCodMarca);
+        void modificarMarcaNombreRecursivo(NodoAVL *&r, string pNombre, int pCodProducto, int pCodMarca);
 
     friend class NodoBB;
 };

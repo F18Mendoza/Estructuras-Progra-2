@@ -26,8 +26,10 @@ class ArbolRN {
         void mostrarMarcas();
         void mostrarMarcasRecursivo(NodoRN *&r);
         void mostrarPrecio(int pCodMarca);
-        void mostrarPrecioRecursivo(int pCodMarca, NodoRN *&r);
-        
+        void mostrarPrecioRecursivo(int pCodMarca, NodoRN *&r);       
+        void modificarMarcaNombre (string pNombre, int pCodMarca);
+        void modificarMarcaNombreRecursivo(NodoRN *&r, string pNombre, int pCodMarca);
+		 
     friend class NodoAVL;
 };
 

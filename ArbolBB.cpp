@@ -192,6 +192,34 @@ void ArbolBB::insertarMarcaRecursivo(NodoBB *&r, string pNombre, int pCodPasillo
 	}
 }
 
+
+void ArbolBB::modificarMarcaNombre (string pNombre, int pCodPasillo, int pCodProducto, int pCodMarca){
+	
+	if (raiz -> codPasillo == pCodPasillo) {
+		raiz -> productos.modificarMarcaNombre(pNombre, pCodProducto, pCodMarca);
+	} else {
+		if (pCodPasillo < raiz -> codPasillo) {
+			modificarMarcaNombreRecursivo(raiz -> HIzq, pNombre, pCodPasillo, pCodProducto, pCodMarca);
+		} else {
+			modificarMarcaNombreRecursivo(raiz -> HDer, pNombre, pCodPasillo, pCodProducto, pCodMarca);
+		}
+	}
+}
+
+
+void ArbolBB::modificarMarcaNombreRecursivo(NodoBB *&r, string pNombre, int pCodPasillo, int pCodProducto, int pCodMarca){
+	
+	if (r -> codPasillo == pCodPasillo) {
+		r -> productos.modificarMarcaNombre(pNombre, pCodProducto, pCodMarca);
+	} else {
+		if (pCodPasillo < r -> codPasillo) {
+			modificarMarcaNombreRecursivo(r -> HIzq, pNombre, pCodPasillo, pCodProducto, pCodMarca);
+		} else {
+			modificarMarcaNombreRecursivo(r -> HDer, pNombre, pCodPasillo, pCodProducto, pCodMarca);
+		}
+	}
+}
+
 void ArbolBB::insertarInventario(string pNombre, int pCodPasillo, int pCodProducto, int pCodMarca, int pStock, int pCanasta) {
 	
 	if (raiz -> codPasillo == pCodPasillo) {

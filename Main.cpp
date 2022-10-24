@@ -86,6 +86,8 @@ void menuClientesNoRegistrado(ArbolBB &supermercado){
 	
 	char clientes;
 	int codigoPasillo, codigoProducto, codigoMarca;
+
+	
 	while (clientes != '5') {
 		cout << " _____________________________________________________________" << endl;
 		cout << "|                MENU CLIENTES NO REGISTRADOS                 |" << endl;
@@ -150,6 +152,74 @@ void menuClientesNoRegistrado(ArbolBB &supermercado){
 	}
 }
 
+void modificarCosas(ArbolBB &supermercado){
+	
+	char opcion;
+	int codigoPasillo, codigoProducto, codigoMarca;
+	string nuevoNombre;
+	
+		while (opcion != '4'){
+		
+	
+		cout << " _____________________________________________________________" << endl;
+		cout << "|                   MENU DE MODIFICACIONES                    |" << endl;
+		cout << "|-------------------------------------------------------------|" << endl;
+		cout << "| 1. Cambiar codigo de marca                                  |" << endl;
+		cout << "| 2. Modificar el precio de una marca                         |" << endl;
+		cout << "| 3. Modificar el nombre de una marca                         |" << endl;
+		cout << "| 4. Salir                                                    |" << endl;
+		cout << "|_____________________________________________________________|" << endl;
+		cout << "Seleccione una opcion: ";
+		cin >> opcion;
+		
+		switch (opcion){
+			
+			case '1':
+				break;
+				
+			case '2':
+				cout << "Ingrese el codigo de pasillo: " << endl;
+				cin >> codigoPasillo;
+				if (supermercado.existeCodigo(codigoPasillo)){
+					cout << "Ingrese el codigo del producto: " << endl;
+					cin >> codigoProducto;
+					if (supermercado.existeProducto(codigoPasillo, codigoProducto)){
+						cout << "Ingrese el codigo de la marca a la que le desea modificar el precio: " << endl;
+						cin >> codigoMarca;
+						if (supermercado.existeMarca(codigoPasillo, codigoProducto, codigoMarca)){
+							//supermercado.modificarMarcaNombre()
+						}
+					}
+				}
+				break;
+				
+			case '3':
+				cout << "Ingrese el codigo de pasillo: " << endl;
+				cin >> codigoPasillo;
+				if (supermercado.existeCodigo(codigoPasillo)){
+					cout << "Ingrese el codigo del producto: " << endl;
+					cin >> codigoProducto;
+					if (supermercado.existeProducto(codigoPasillo, codigoProducto)){
+						cout << "Ingrese el codigo de la marca a la que le desea modificar el nombre: " << endl;
+						cin >> codigoMarca;
+						if (supermercado.existeMarca(codigoPasillo, codigoProducto, codigoMarca)){
+							cout << "Ingrese el nombre por el que desea cambiar el nombre actual: " << endl;
+							cin >> nuevoNombre;
+							supermercado.modificarMarcaNombre(nuevoNombre, codigoPasillo, codigoProducto, codigoMarca);
+						}
+					}
+				}
+				break;
+			
+		}
+		
+		
+		}
+		
+		
+		
+}
+
 void baseDeDatos(ArbolB &clientes, int &descuento, ArbolBB &supermercado){
 	
 	char datos;
@@ -198,6 +268,7 @@ void baseDeDatos(ArbolB &clientes, int &descuento, ArbolBB &supermercado){
 				
 			case '2':
 				cout << "Modificar cosas" << endl;
+				modificarCosas(supermercado);
 				break;
 				
 			case '3':
@@ -223,6 +294,7 @@ void baseDeDatos(ArbolB &clientes, int &descuento, ArbolBB &supermercado){
 				break;
 				
 			case '4':
+				cout << "Para los clientes que han facturado 4 veces o más... " << endl;
 				cout << "El descuento actual es del " << descuento << "%." << endl;
 				break;
 				
@@ -244,7 +316,9 @@ void baseDeDatos(ArbolB &clientes, int &descuento, ArbolBB &supermercado){
 					cout << "Ingrese el correo del cliente: ";
 					cin >> correoCliente;
 					clientes.insertar(cedCliente, nomCliente, celCliente, correoCliente);
+					break;
 				}
+				cout << "Ya hay un cliente con esa cedula, accion invalida" << endl;
 				break;
 				
 			case '7':
@@ -261,6 +335,7 @@ void reportes(ArbolBB &supermercado, ArbolB &clientes){
 	
 	int seleccion;
 	int pasilloCliente;
+	int productoCliente;
 	
 	while (seleccion != 15){
 		cout << " -------------------------------------------------------------" << endl;
@@ -321,7 +396,20 @@ void reportes(ArbolBB &supermercado, ArbolB &clientes){
 				break;
 				
 			case 9:
-				cout << "salen las marcas que hay de un producto" << endl;
+				cout << "Marcas que hay de un producto\n" << endl;
+				cout << "Por favor ingrese el pasillo: " << endl;
+				cin >> pasilloCliente;
+				if (supermercado.existeCodigo(pasilloCliente)){
+					cout << "Por favor ingrese el producto: " << endl;
+					cin >> productoCliente;
+					if (supermercado.existeProducto(pasilloCliente, productoCliente)){					
+						supermercado.mostrarMarcas(pasilloCliente, productoCliente);
+						break;
+					}
+					cout << "El codigo de producto que ingreso no pertenece a ninguno disponible" << endl;
+					break;									
+				}
+				cout << "El codigo de pasillo que ingreso no corresponde a ninguno disponible" << endl;			
 				break;
 			
 			case 10:
@@ -330,7 +418,7 @@ void reportes(ArbolBB &supermercado, ArbolB &clientes){
 				
 			case 11: 
 				cout << "Productos de un pasillo\n" << endl;
-				cout << "De que pasillo desearía consultar los productos: " << endl;
+				cout << "De que pasillo desearia consultar los productos: " << endl;
 				cin >> pasilloCliente;
 				if (supermercado.existeCodigo(pasilloCliente)){
 					supermercado.mostrarProductos(pasilloCliente);
