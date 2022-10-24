@@ -14,11 +14,11 @@ using namespace std;
 
 //------------------------------------------------------------------------------------------------------------------------
 
-void menuClientesRegistrado(int &descuento, ArbolBB &supermercado){
+void menuClientesRegistrado(int &descuento, ArbolBB &supermercado, ArbolB &clientes){
 	
-	char clientes;
-	int codigoPasillo, codigoProducto, codigoMarca;
-	while (clientes != '5'){
+	char seleccion;
+	int codigoPasillo, codigoProducto, codigoMarca, cedulaCliente, unidades;
+	while (seleccion != '5'){
 		cout << " _____________________________________________________________" << endl;
 		cout << "|                   MENU CLIENTES REGISTRADOS                 |" << endl;
 		cout << "|-------------------------------------------------------------|" << endl;
@@ -29,9 +29,9 @@ void menuClientesRegistrado(int &descuento, ArbolBB &supermercado){
 		cout << "| 5. Salir                                                    |" << endl;                                                     
 		cout << "|_____________________________________________________________|" << endl;
 		cout << "Seleccione una opcion: ";
-		cin >> clientes;
+		cin >> seleccion;
 		
-		switch (clientes){
+		switch (seleccion){
 			
 			case '1':
 				cout << "Indique el codigo del pasillo: ";
@@ -70,7 +70,29 @@ void menuClientesRegistrado(int &descuento, ArbolBB &supermercado){
 				break;
 				
 			case '4':
-				cout << "Se compra" << endl;
+				cout << "Por favor ingrese su numero de cedula: " << endl;
+				cin >> cedulaCliente;
+				if (clientes.existeCedula(cedulaCliente)){
+					supermercado.mostrarPasillos();
+					cout << "Ingrese el codigo de pasillo que desee: ";
+					cin >> codigoPasillo;
+					if (supermercado.existeCodigo(codigoPasillo)){
+						supermercado.mostrarProductos(codigoPasillo);
+						cout << "Seleccione el codigo del producto que desee: ";
+						cin >> codigoProducto;
+						if (supermercado.existeProducto(codigoPasillo, codigoProducto)){
+							supermercado.mostrarMarcas(codigoPasillo, codigoProducto);
+							cout << "Indique la cantidad de unidades que desea comprar: ";
+							cin >> unidades;
+						}else{
+							cout << "La marca no existe, opcion invalida" << endl;							
+						}
+					}else{
+						cout << "El producto no existe, opcion invalida" << endl;
+					}
+				}else{
+					cout << "El pasillo no existe, opcion invalida" << endl;
+				}
 				break;
 				
 			case '5': 
@@ -691,7 +713,7 @@ int main() {
 				cout << "Ingrese su cedula para verificar si esta registrado o no: ";
 				cin >> cedCliente;
 				if(clientes.existeCedula(cedCliente)){
-					menuClientesRegistrado(descuento, supermercado);
+					menuClientesRegistrado(descuento, supermercado, clientes);
 					break;
 				}
 				cout << "Usted no es un cliente registrado." << endl;
