@@ -29,7 +29,7 @@ void ArbolB::mostrar(){
 		
 		mostrarRecursivo(raiz->HIzq);
 		mostrarRecursivo(raiz->HDer);
-		cout << raiz->nombre << endl;
+		cout << "Nombre del cliente: "<<raiz->nombre << endl;
 	}
 }
 
@@ -39,7 +39,7 @@ void ArbolB::mostrarRecursivo(NodoB *&r){
 		
 		mostrarRecursivo(r->HIzq);
 		mostrarRecursivo(r->HDer);
-		cout << r->nombre << endl;
+		cout << "Nombre del Cliente: "<< r->nombre << endl;
 	}
 }
 

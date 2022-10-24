@@ -10,15 +10,6 @@ using namespace std;
 
 //--------------------------------------METODOS DE REPORTES-----------------------------------------
 
-void inventarioDeTienda(ArbolBB&supermercado) {
-
-	ofstream file;
-	file.open("InventarioDeLaTienda.txt");
-	file << "--- Inventario de la Tienda ---" << endl;
-	file << supermercado.mostrarInventario();
-	file.close();
-}
-
 
 
 //------------------------------------------------------------------------------------------------------------------------
@@ -266,9 +257,10 @@ void baseDeDatos(ArbolB &clientes, int &descuento, ArbolBB &supermercado){
 	}	
 }
 
-void reportes(ArbolBB &supermercado){
+void reportes(ArbolBB &supermercado, ArbolB &clientes){
 	
 	int seleccion;
+	int pasilloCliente;
 	
 	while (seleccion != 15){
 		cout << " -------------------------------------------------------------" << endl;
@@ -337,21 +329,29 @@ void reportes(ArbolBB &supermercado){
 				break;
 				
 			case 11: 
-				cout << "salen los productos de un pasillo" << endl;
+				cout << "Productos de un pasillo\n" << endl;
+				cout << "De que pasillo desearía consultar los productos: " << endl;
+				cin >> pasilloCliente;
+				if (supermercado.existeCodigo(pasilloCliente)){
+					supermercado.mostrarProductos(pasilloCliente);
+					break;
+				}
+				cout << "El pasillo ingresado no corresponde a ninguno disponible\n" << endl;
 				break;
 							
 			case 12:
-				cout << "salen los clientes del supermercado" << endl;
+				cout << "Los clientes del supermercado\n" << endl;
+				clientes.mostrar();
 				break;
 			
 			case 13:
-				cout << "salen los pasillos del supermercado" << endl;
+				cout << "Los pasillos del supermercado\n" << endl;
+				supermercado.mostrarPasillos();
 				break;
 				
 			case 14:
-				cout << "sale el inventario del supermercado" << endl;
+				cout << "El inventario del supermercado\n" << endl;
 				supermercado.mostrarInventario();
-				inventarioDeTienda(supermercado);
 				break;
 				
 			case 15:
@@ -403,7 +403,7 @@ void menuAdministrador(ArbolB &clientes, int &descuento, ArbolBB &supermercado){
 				break;
 			case '5':
 				cout << "Reportes" << endl;
-				reportes(supermercado);
+				reportes(supermercado, clientes);
 				break;
 			case '6':
 				cout << "Volviendo al menu anterior." << endl;	
