@@ -23,47 +23,6 @@ void ArbolRN::podarRecursivo(NodoRN *&r) {
     }
 }
 
-void ArbolRN::revisarGondolas(){
-	
-	int abastecer = 7;
-	int cantGondola;
-	
-	if (raiz != NULL){
-		
-		revisarGondolasRecursivo (raiz->HIzq);
-		revisarGondolasRecursivo (raiz -> HDer);
-		
-		if (raiz->cantidad < 2){
-			cantGondola = raiz->cantidad;
-			cout << "La cantidad que había en gondola era de: " << cantGondola << endl;
-			raiz->cantidad = abastecer;
-			cantGondola = abastecer+cantGondola;
-			cout << "La nueva cantidad en gondola es de: " << cantGondola;
-		}
-	}
-}
-
-void ArbolRN::revisarGondolasRecursivo(NodoRN *&r){
-	
-	int abastecer = 7;
-	int cantGondola;
-	
-	if (raiz != NULL){
-		
-		revisarGondolasRecursivo (r->HIzq);
-		revisarGondolasRecursivo (r-> HDer);
-		
-		if (raiz->cantidad < 2){
-			cantGondola = raiz->cantidad;
-			cout << "La cantidad que había en gondola era de: " << cantGondola << endl;
-			raiz->cantidad = abastecer;
-			cantGondola = abastecer+cantGondola;
-			cout << "La nueva cantidad en gondola es de: " << cantGondola;
-		}
-	}
-
-}
-
 void ArbolRN::insertar(string pNombre, int pCodMarca, int pCantidad, float pPrecio) {
 
     if (raiz == NULL)
@@ -243,6 +202,110 @@ void ArbolRN::modificarMarcaPrecioRecursivo(NodoRN *&r, float pPrecio, int pCodM
 			modificarMarcaPrecioRecursivo(r -> HIzq, pPrecio, pCodMarca);
 		} else {
 			modificarMarcaPrecioRecursivo(r -> HDer, pPrecio, pCodMarca);
+		}
+	}
+}
+
+bool ArbolRN::verificarCantidad(int pCodMarca, int pCantidad) {
+	
+	if (raiz -> codMarca == pCodMarca) {
+		return pCantidad <= raiz -> cantidad;
+	} else {
+		if (pCodMarca < raiz -> codMarca) {
+			return verificarCantidadRecursivo(raiz -> HIzq, pCodMarca, pCantidad);
+		} else {
+			return verificarCantidadRecursivo(raiz -> HDer, pCodMarca, pCantidad);
+		}
+	}
+}
+
+bool ArbolRN::verificarCantidadRecursivo(NodoRN *&r, int pCodMarca, int pCantidad) {
+	
+	if (r -> codMarca == pCodMarca) {
+		return pCantidad <= r -> cantidad;
+	} else {
+		if (pCodMarca < r -> codMarca) {
+			return verificarCantidadRecursivo(r -> HIzq, pCodMarca, pCantidad);
+		} else {
+			return verificarCantidadRecursivo(r -> HDer, pCodMarca, pCantidad);
+		}
+	}
+}
+
+int ArbolRN::cantidadMaxima(int pCodMarca) {
+	
+	if (raiz -> codMarca == pCodMarca) {
+		return raiz -> cantidad;
+	} else {
+		if (pCodMarca < raiz -> codMarca) {
+			return cantidadMaximaRecursivo(raiz -> HIzq, pCodMarca);
+		} else {
+			return cantidadMaximaRecursivo(raiz -> HDer, pCodMarca);
+		}
+	}
+}
+
+int ArbolRN::cantidadMaximaRecursivo(NodoRN *&r, int pCodMarca) {
+	
+	if (r -> codMarca == pCodMarca) {
+		return r -> cantidad;
+	} else {
+		if (pCodMarca < r -> codMarca) {
+			return cantidadMaximaRecursivo(r -> HIzq, pCodMarca);
+		} else {
+			return cantidadMaximaRecursivo(r -> HDer, pCodMarca);
+		}
+	}
+}
+
+float ArbolRN::obtenerPrecio(int pCodMarca) {
+	
+	if (raiz -> codMarca == pCodMarca) {
+		return raiz -> precio;
+	} else {
+		if (pCodMarca < raiz -> codMarca) {
+			return obtenerPrecioRecursivo(raiz -> HIzq, pCodMarca);
+		} else {
+			return obtenerPrecioRecursivo(raiz -> HDer, pCodMarca);
+		}
+	}
+}
+
+float ArbolRN::obtenerPrecioRecursivo(NodoRN *&r, int pCodMarca) {
+	
+	if (r -> codMarca == pCodMarca) {
+		return r -> precio;
+	} else {
+		if (pCodMarca < r -> codMarca) {
+			return obtenerPrecioRecursivo(r -> HIzq, pCodMarca);
+		} else {
+			return obtenerPrecioRecursivo(r -> HDer, pCodMarca);
+		}
+	}
+}
+
+string ArbolRN::nombreMarca(int pCodMarca) {
+	
+	if (raiz -> codMarca == pCodMarca) {
+		return raiz -> nombre;
+	} else {
+		if (pCodMarca < raiz -> codMarca) {
+			return nombreMarcaRecursivo(raiz -> HIzq, pCodMarca);
+		} else {
+			return nombreMarcaRecursivo(raiz -> HDer, pCodMarca);
+		}
+	}
+}
+
+string ArbolRN::nombreMarcaRecursivo(NodoRN *&r, int pCodMarca) {
+	
+	if (r -> codMarca == pCodMarca) {
+		return r -> nombre;
+	} else {
+		if (pCodMarca < r -> codMarca) {
+			return nombreMarcaRecursivo(r -> HIzq, pCodMarca);
+		} else {
+			return nombreMarcaRecursivo(r -> HDer, pCodMarca);
 		}
 	}
 }

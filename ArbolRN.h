@@ -31,9 +31,15 @@ class ArbolRN {
         void modificarMarcaNombreRecursivo(NodoRN *&r, string pNombre, int pCodMarca);
         void modificarMarcaPrecio (float pPrecio, int pCodMarca);
         void modificarMarcaPrecioRecursivo(NodoRN *&r, float pPrecio, int pCodMarca);
-        void revisarGondolas();
-        void revisarGondolasRecursivo(NodoRN *&r);
-		 
+        bool verificarCantidad(int pCodMarca, int pCantidad);
+        bool verificarCantidadRecursivo(NodoRN *&r, int pCodMarca, int pCantidad);
+        int cantidadMaxima(int pCodMarca);
+        int cantidadMaximaRecursivo(NodoRN *&r, int pCodMarca);
+        float obtenerPrecio(int pCodMarca);
+        float obtenerPrecioRecursivo(NodoRN *&r, int pCodMarca);
+        string nombreMarca(int pCodMarca);
+        string nombreMarcaRecursivo(NodoRN *&r, int pCodMarca);
+		
     friend class NodoAVL;
 };
 

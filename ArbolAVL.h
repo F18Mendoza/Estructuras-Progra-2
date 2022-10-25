@@ -37,10 +37,22 @@ class ArbolAVL {
         void mostrarRecursivo(NodoAVL *&r);
         void mostrarPrecio(int pCodProducto, int pCodMarca);
         void mostrarPrecioRecursivo(int pCodProducto, int pCodMarca, NodoAVL *&r);
-        void modificarMarcaNombre (string pNombre, int pCodProducto, int pCodMarca);
+        void modificarMarcaNombre(string pNombre, int pCodProducto, int pCodMarca);
         void modificarMarcaNombreRecursivo(NodoAVL *&r, string pNombre, int pCodProducto, int pCodMarca);
-        void modificarMarcaPrecio (float pPrecio, int pCodProducto, int pCodMarca);
+        void modificarMarcaPrecio(float pPrecio, int pCodProducto, int pCodMarca);
         void modificarMarcaPrecioRecursivo(NodoAVL *&r, float pPrecio, int pCodProducto, int pCodMarca);
+        bool verificarCantidad(int pCodProducto, int pCodMarca, int pCantidad);
+        bool verificarCantidadRecursivo(NodoAVL *&r, int pCodProducto, int pCodMarca, int pCantidad);
+        int cantidadMaxima(int pCodProducto, int pCodMarca);
+        int cantidadMaximaRecursivo(NodoAVL *&r, int pCodProducto, int pCodMarca);
+        bool canasta(int pCodProducto, int pCodMarca);
+        bool canastaRecursivo(NodoAVL *&r, int pCodProducto, int pCodMarca);
+        float obtenerPrecio(int pCodProducto, int pCodMarca);
+        float obtenerPrecioRecursivo(NodoAVL *&r, int pCodProducto, int pCodMarca);
+        string nombreProducto(int pCodProducto);
+        string nombreProductoRecursivo(NodoAVL *&r, int pCodProducto);
+        string nombreMarca(int pCodProducto, int pCodMarca);
+        string nombreMarcaRecursivo(NodoAVL *&r, int pCodProducto, int pCodMarca);
 
     friend class NodoBB;
 };

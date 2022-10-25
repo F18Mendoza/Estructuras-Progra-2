@@ -390,7 +390,7 @@ void ArbolBB::modificarMarcaNombreRecursivo(NodoBB *&r, string pNombre, int pCod
 }
 
 
-void ArbolBB::modificarMarcaPrecio (float pPrecio, int pCodPasillo, int pCodProducto, int pCodMarca){
+void ArbolBB::modificarMarcaPrecio(float pPrecio, int pCodPasillo, int pCodProducto, int pCodMarca){
 	
 	if (raiz -> codPasillo == pCodPasillo) {
 		raiz -> productos.modificarMarcaPrecio(pPrecio, pCodProducto, pCodMarca);
@@ -413,6 +413,162 @@ void ArbolBB::modificarMarcaPrecioRecursivo(NodoBB *&r, float pPrecio, int pCodP
 			modificarMarcaPrecioRecursivo(r -> HIzq, pPrecio, pCodPasillo, pCodProducto, pCodMarca);
 		} else {
 			modificarMarcaPrecioRecursivo(r -> HDer, pPrecio, pCodPasillo, pCodProducto, pCodMarca);
+		}
+	}
+}
+
+bool ArbolBB::verificarCantidad(int pCodPasillo, int pCodProducto, int pCodMarca, int pCantidad) {
+	
+	if (raiz -> codPasillo == pCodPasillo) {
+		return raiz -> productos.verificarCantidad(pCodProducto, pCodMarca, pCantidad);
+	} else {
+		if (pCodPasillo < raiz -> codPasillo) {
+			return verificarCantidadRecursivo(raiz -> HIzq, pCodPasillo, pCodProducto, pCodMarca, pCantidad);
+		} else {
+			return verificarCantidadRecursivo(raiz -> HDer, pCodPasillo, pCodProducto, pCodMarca, pCantidad);
+		}
+	}
+}
+
+bool ArbolBB::verificarCantidadRecursivo(NodoBB *&r, int pCodPasillo, int pCodProducto, int pCodMarca, int pCantidad) {
+	
+	if (r -> codPasillo == pCodPasillo) {
+		return r -> productos.verificarCantidad(pCodProducto, pCodMarca, pCantidad);
+	} else {
+		if (pCodPasillo < r -> codPasillo) {
+			return verificarCantidadRecursivo(r -> HIzq, pCodPasillo, pCodProducto, pCodMarca, pCantidad);
+		} else {
+			return verificarCantidadRecursivo(r -> HDer, pCodPasillo, pCodProducto, pCodMarca, pCantidad);
+		}
+	}
+}
+
+int ArbolBB::cantidadMaxima(int pCodPasillo, int pCodProducto, int pCodMarca) {
+	
+	if (raiz -> codPasillo == pCodPasillo) {
+		return raiz -> productos.cantidadMaxima(pCodProducto, pCodMarca);
+	} else {
+		if (pCodPasillo < raiz -> codPasillo) {
+			return cantidadMaximaRecursivo(raiz -> HIzq, pCodPasillo, pCodProducto, pCodMarca);
+		} else {
+			return cantidadMaximaRecursivo(raiz -> HDer, pCodPasillo, pCodProducto, pCodMarca);
+		}
+	}
+}
+
+int ArbolBB::cantidadMaximaRecursivo(NodoBB *&r, int pCodPasillo, int pCodProducto, int pCodMarca) {
+	
+	if (r -> codPasillo == pCodPasillo) {
+		return r -> productos.cantidadMaxima(pCodProducto, pCodMarca);
+	} else {
+		if (pCodPasillo < r -> codPasillo) {
+			return cantidadMaximaRecursivo(r -> HIzq, pCodPasillo, pCodProducto, pCodMarca);
+		} else {
+			return cantidadMaximaRecursivo(r -> HDer, pCodPasillo, pCodProducto, pCodMarca);
+		}
+	}
+}
+
+bool ArbolBB::canasta(int pCodPasillo, int pCodProducto, int pCodMarca) {
+	
+	if (raiz -> codPasillo == pCodPasillo) {
+		return raiz -> productos.canasta(pCodProducto, pCodMarca);
+	} else {
+		if (pCodPasillo < raiz -> codPasillo) {
+			return canastaRecursivo(raiz -> HIzq, pCodPasillo, pCodProducto, pCodMarca);
+		} else {
+			return canastaRecursivo(raiz -> HDer, pCodPasillo, pCodProducto, pCodMarca);
+		}
+	}
+}
+
+bool ArbolBB::canastaRecursivo(NodoBB *&r, int pCodPasillo, int pCodProducto, int pCodMarca) {
+	
+	if (r -> codPasillo == pCodPasillo) {
+		return r -> productos.canasta(pCodProducto, pCodMarca);
+	} else {
+		if (pCodPasillo < r -> codPasillo) {
+			return canastaRecursivo(r -> HIzq, pCodPasillo, pCodProducto, pCodMarca);
+		} else {
+			return canastaRecursivo(r -> HDer, pCodPasillo, pCodProducto, pCodMarca);
+		}
+	}
+}
+
+float ArbolBB::obtenerPrecio(int pCodPasillo, int pCodProducto, int pCodMarca) {
+	
+	if (raiz -> codPasillo == pCodPasillo) {
+		return raiz -> productos.obtenerPrecio(pCodProducto, pCodMarca);
+	} else {
+		if (pCodPasillo < raiz -> codPasillo) {
+			return obtenerPrecioRecursivo(raiz -> HIzq, pCodPasillo, pCodProducto, pCodMarca);
+		} else {
+			return obtenerPrecioRecursivo(raiz -> HDer, pCodPasillo, pCodProducto, pCodMarca);
+		}
+	}
+}
+
+float ArbolBB::obtenerPrecioRecursivo(NodoBB *&r, int pCodPasillo, int pCodProducto, int pCodMarca) {
+	
+	if (r -> codPasillo == pCodPasillo) {
+		return r -> productos.obtenerPrecio(pCodProducto, pCodMarca);
+	} else {
+		if (pCodPasillo < r -> codPasillo) {
+			return obtenerPrecioRecursivo(r -> HIzq, pCodPasillo, pCodProducto, pCodMarca);
+		} else {
+			return obtenerPrecioRecursivo(r -> HDer, pCodPasillo, pCodProducto, pCodMarca);
+		}
+	}
+}
+
+string ArbolBB::nombreProducto(int pCodPasillo, int pCodProducto) {
+	
+	if (raiz -> codPasillo == pCodPasillo) {
+		return raiz -> productos.nombreProducto(pCodProducto);
+	} else {
+		if (pCodPasillo < raiz -> codPasillo) {
+			return nombreProductoRecursivo(raiz -> HIzq, pCodPasillo, pCodProducto);
+		} else {
+			return nombreProductoRecursivo(raiz -> HDer, pCodPasillo, pCodProducto);
+		}
+	}
+}
+
+string ArbolBB::nombreProductoRecursivo(NodoBB *&r, int pCodPasillo, int pCodProducto) {
+	
+	if (r -> codPasillo == pCodPasillo) {
+		return r -> productos.nombreProducto(pCodProducto);
+	} else {
+		if (pCodPasillo < r -> codPasillo) {
+			return nombreProductoRecursivo(r -> HIzq, pCodPasillo, pCodProducto);
+		} else {
+			return nombreProductoRecursivo(r -> HDer, pCodPasillo, pCodProducto);
+		}
+	}
+}
+
+string ArbolBB::nombreMarca(int pCodPasillo, int pCodProducto, int pCodMarca) {
+	
+	if (raiz -> codPasillo == pCodPasillo) {
+		return raiz -> productos.nombreMarca(pCodProducto, pCodMarca);
+	} else {
+		if (pCodPasillo < raiz -> codPasillo) {
+			return nombreMarcaRecursivo(raiz -> HIzq, pCodPasillo, pCodProducto, pCodMarca);
+		} else {
+			return nombreMarcaRecursivo(raiz -> HDer, pCodPasillo, pCodProducto, pCodMarca);
+		}
+	}
+}
+
+string ArbolBB::nombreMarcaRecursivo(NodoBB *&r, int pCodPasillo, int pCodProducto, int pCodMarca) {
+	
+	if (r -> codPasillo == pCodPasillo) {
+		return r -> productos.nombreMarca(pCodProducto, pCodMarca);
+	} else {
+		if (pCodPasillo < r -> codPasillo) {
+			return nombreMarcaRecursivo(r -> HIzq, pCodPasillo, pCodProducto, pCodMarca);
+		} else {
+			return nombreMarcaRecursivo(r -> HDer, pCodPasillo, pCodProducto, pCodMarca);
 		}
 	}
 }

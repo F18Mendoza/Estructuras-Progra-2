@@ -4,8 +4,8 @@
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = Main.o ArbolAVL.o ArbolBB.o ArbolRN.o ArbolAA.o ArbolB.o ListaDC.o
-LINKOBJ  = Main.o ArbolAVL.o ArbolBB.o ArbolRN.o ArbolAA.o ArbolB.o ListaDC.o
+OBJ      = Main.o ArbolAVL.o ArbolBB.o ArbolRN.o ArbolAA.o ArbolB.o Carrito.o Compras.o ListaDescuento.o Reportes.o
+LINKOBJ  = Main.o ArbolAVL.o ArbolBB.o ArbolRN.o ArbolAA.o ArbolB.o Carrito.o Compras.o ListaDescuento.o Reportes.o
 LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc
 INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
 CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
@@ -42,5 +42,14 @@ ArbolAA.o: ArbolAA.cpp
 ArbolB.o: ArbolB.cpp
 	$(CPP) -c ArbolB.cpp -o ArbolB.o $(CXXFLAGS)
 
-ListaDC.o: ListaDC.cpp
-	$(CPP) -c ListaDC.cpp -o ListaDC.o $(CXXFLAGS)
+Carrito.o: Carrito.cpp
+	$(CPP) -c Carrito.cpp -o Carrito.o $(CXXFLAGS)
+
+Compras.o: Compras.cpp
+	$(CPP) -c Compras.cpp -o Compras.o $(CXXFLAGS)
+
+ListaDescuento.o: ListaDescuento.cpp
+	$(CPP) -c ListaDescuento.cpp -o ListaDescuento.o $(CXXFLAGS)
+
+Reportes.o: Reportes.cpp
+	$(CPP) -c Reportes.cpp -o Reportes.o $(CXXFLAGS)

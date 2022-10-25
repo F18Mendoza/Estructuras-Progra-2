@@ -29,7 +29,7 @@ void ArbolB::mostrar(){
 		
 		mostrarRecursivo(raiz->HIzq);
 		mostrarRecursivo(raiz->HDer);
-		cout << "Nombre del cliente: "<<raiz->nombre << endl;
+		cout << "Nombre del cliente: "<<raiz->nombre << " Cedula: " << raiz -> cedula << endl;
 	}
 }
 
@@ -39,7 +39,7 @@ void ArbolB::mostrarRecursivo(NodoB *&r){
 		
 		mostrarRecursivo(r->HIzq);
 		mostrarRecursivo(r->HDer);
-		cout << "Nombre del Cliente: "<< r->nombre << endl;
+		cout << "Nombre del cliente: "<< r -> nombre << " Cedula: " << r -> cedula << endl;
 	}
 }
 
@@ -99,6 +99,7 @@ bool ArbolB::existeCedulaRecursivo(int pCedula, NodoB *&r) {
         }
     }
 }
+
 
 bool ArbolB::existeAdmin(int pAdmin) {
 
@@ -197,3 +198,82 @@ void ArbolB::insertarRecursivo(NodoB *&r, int pCedula, string pNombre, int pTele
 }
 
 
+
+int ArbolB::telefonoCliente(int pCedula){
+	
+	if (raiz == NULL){
+		return 0;
+	}
+	else {
+		
+		if (raiz->cedula == pCedula){
+			return raiz->telefono;
+		}
+		else{
+			if (pCedula < raiz->cedula)
+				return telefonoClienteRecursivo(raiz->HIzq, pCedula);
+			else
+				return telefonoClienteRecursivo(raiz->HDer, pCedula);			
+		}
+	}
+}
+
+int ArbolB::telefonoClienteRecursivo(NodoB *&r, int pCedula){
+	
+	if (r == NULL){
+		return 0;
+	}
+	else {
+		
+		if (r->cedula == pCedula){
+			return r->telefono;
+		}
+		else{
+			if (pCedula < r->cedula)
+				return telefonoClienteRecursivo(r->HIzq, pCedula);
+			else
+				return telefonoClienteRecursivo(r->HDer, pCedula);		
+		}
+	}
+}
+
+
+string ArbolB::nombreCliente(int pCedula){
+	
+	if (raiz == NULL){
+		string noNombre = "No hay clientes";
+		return noNombre;
+	}
+	else {
+		
+		if (raiz->cedula == pCedula){
+			return raiz->nombre;
+		}
+		else{
+			if (pCedula < raiz->cedula)
+				return nombreClienteRecursivo(raiz->HIzq, pCedula);
+			else
+				return nombreClienteRecursivo(raiz->HDer, pCedula);			
+		}
+	}
+}
+
+string ArbolB::nombreClienteRecursivo(NodoB *&r, int pCedula){
+	
+	if (r == NULL){
+		string noNombre = "No hay clientes";
+		return noNombre;
+	}
+	else {
+		
+		if (r->cedula == pCedula){
+			return r->nombre;
+		}
+		else{
+			if (pCedula < r->cedula)
+				return nombreClienteRecursivo(r->HIzq, pCedula);
+			else
+				return nombreClienteRecursivo(r->HDer, pCedula);		
+		}
+	}
+}

@@ -29,7 +29,10 @@ class ArbolB {
         void mostrarRecursivo(NodoB *&r);
         void mostrarAdmin();
         void mostrarAdminRecursivo(NodoB *&r);
-
+        string nombreCliente(int pCedula);
+        string nombreClienteRecursivo(NodoB *&r, int pCedula);
+        int telefonoCliente(int pCedula);
+        int telefonoClienteRecursivo(NodoB *&r, int pCedula);
 };
 
 #endif
