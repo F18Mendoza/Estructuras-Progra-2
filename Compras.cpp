@@ -68,8 +68,11 @@ void Compras::agregarArticulo(int pCedula, int pCodPasillo, int pCodProducto, in
 
 bool Compras::existeCarrito(int pCedula) {
 	
-	Carrito *temp == primero;
-	while (temp -> siguiente != NULL && temp -> cedula != pCedula) {
+	if (primero == NULL) {
+		return false;
+	}
+	Carrito *temp = primero;
+	while (temp -> cedula != pCedula) {
 		temp = temp -> siguiente;
 	}
 	if (temp -> cedula == pCedula) {
@@ -78,17 +81,7 @@ bool Compras::existeCarrito(int pCedula) {
 	return false;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+void Compras::sacarArticulo() {
+	
+	primero -> sacarArticulo();
+}

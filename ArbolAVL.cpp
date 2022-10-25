@@ -394,3 +394,107 @@ int ArbolAVL::cantidadMaximaRecursivo(NodoAVL *&r, int pCodProducto, int pCodMar
 		}
 	}
 }
+
+bool ArbolAVL::canasta(int pCodProducto, int pCodMarca) {
+	
+	if (raiz -> codProducto == pCodProducto) {
+		return raiz -> inventario.canasta(pCodMarca);
+	} else {
+		if (pCodProducto < raiz -> codProducto) {
+			return canastaRecursivo(raiz -> HIzq, pCodProducto, pCodMarca);
+		} else {
+			return canastaRecursivo(raiz -> HDer, pCodProducto, pCodMarca);
+		}
+	}
+}
+
+bool ArbolAVL::canastaRecursivo(NodoAVL *&r, int pCodProducto, int pCodMarca) {
+	
+	if (r -> codProducto == pCodProducto) {
+		return r -> inventario.canasta(pCodMarca);
+	} else {
+		if (pCodProducto < r -> codProducto) {
+			return canastaRecursivo(r -> HIzq, pCodProducto, pCodMarca);
+		} else {
+			return canastaRecursivo(r -> HDer, pCodProducto, pCodMarca);
+		}
+	}
+}
+
+float ArbolAVL::obtenerPrecio(int pCodProducto, int pCodMarca) {
+	
+	if (raiz -> codProducto == pCodProducto) {
+		return raiz -> marcas.obtenerPrecio(pCodMarca);
+	} else {
+		if (pCodProducto < raiz -> codProducto) {
+			return obtenerPrecioRecursivo(raiz -> HIzq, pCodProducto, pCodMarca);
+		} else {
+			return obtenerPrecioRecursivo(raiz -> HDer, pCodProducto, pCodMarca);
+		}
+	}
+}
+
+float ArbolAVL::obtenerPrecioRecursivo(NodoAVL *&r, int pCodProducto, int pCodMarca) {
+	
+	if (r -> codProducto == pCodProducto) {
+		return r -> marcas.obtenerPrecio(pCodMarca);
+	} else {
+		if (pCodProducto < r -> codProducto) {
+			return obtenerPrecioRecursivo(r -> HIzq, pCodProducto, pCodMarca);
+		} else {
+			return obtenerPrecioRecursivo(r -> HDer, pCodProducto, pCodMarca);
+		}
+	}
+}
+
+string ArbolAVL::nombreProducto(int pCodProducto) {
+	
+	if (raiz -> codProducto == pCodProducto) {
+		return raiz -> nombre;
+	} else {
+		if (pCodProducto < raiz -> codProducto) {
+			return nombreProductoRecursivo(raiz -> HIzq, pCodProducto);
+		} else {
+			return nombreProductoRecursivo(raiz -> HDer, pCodProducto);
+		}
+	}
+}
+
+string ArbolAVL::nombreProductoRecursivo(NodoAVL *&r, int pCodProducto) {
+	
+	if (r -> codProducto == pCodProducto) {
+		return r -> nombre;
+	} else {
+		if (pCodProducto < r -> codProducto) {
+			return nombreProductoRecursivo(r -> HIzq, pCodProducto);
+		} else {
+			return nombreProductoRecursivo(r -> HDer, pCodProducto);
+		}
+	}
+}
+
+string ArbolAVL::nombreMarca(int pCodProducto, int pCodMarca) {
+	
+	if (raiz -> codProducto == pCodProducto) {
+		return raiz -> marcas.nombreMarca(pCodMarca);
+	} else {
+		if (pCodProducto < raiz -> codProducto) {
+			return nombreMarcaRecursivo(raiz -> HIzq, pCodProducto, pCodMarca);
+		} else {
+			return nombreMarcaRecursivo(raiz -> HDer, pCodProducto, pCodMarca);
+		}
+	}
+}
+
+string ArbolAVL::nombreMarcaRecursivo(NodoAVL *&r, int pCodProducto, int pCodMarca) {
+	
+	if (r -> codProducto == pCodProducto) {
+		return r -> marcas.nombreMarca(pCodMarca);
+	} else {
+		if (pCodProducto < r -> codProducto) {
+			return nombreMarcaRecursivo(r -> HIzq, pCodProducto, pCodMarca);
+		} else {
+			return nombreMarcaRecursivo(r -> HDer, pCodProducto, pCodMarca);
+		}
+	}
+}

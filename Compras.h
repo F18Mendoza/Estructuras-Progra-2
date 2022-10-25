@@ -28,6 +28,7 @@ class Compras {
 		int obtenerCantidad();
 		void eliminarCarrito();
 		bool existeCarrito(int pCedula);
+		void sacarArticulo();
 };
 
 #endif

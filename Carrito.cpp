@@ -28,13 +28,18 @@ void Carrito::agregarArticulo(int pCodPasillo, int pCodProducto, int pCodMarca, 
 
 void Carrito::sacarArticulo() {
 	
-	Articulo *temp;
-	while (temp -> siguiente -> siguiente != NULL) {
-		temp = temp -> siguiente;
+	Articulo *temp = primero;
+	if (primero -> siguiente == NULL) {
+		primero = NULL;
+		delete temp;
+	} else {
+		while (temp -> siguiente -> siguiente != NULL) {
+			temp = temp -> siguiente;
+		}
+		Articulo *aux = temp -> siguiente;
+		temp -> siguiente = NULL;
+		delete aux;
 	}
-	Articulo *aux = temp -> siguiente;
-	temp -> siguiente = NULL;
-	delete aux;
 }
 
 int Carrito::obtenerCodigoPasillo() {

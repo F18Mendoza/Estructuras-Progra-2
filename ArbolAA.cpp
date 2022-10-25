@@ -134,4 +134,28 @@ void ArbolAA::modificarMarcaNombreRecursivo(NodoAA *&r, string pNombre, int pCod
 	}
 }
 
+bool ArbolAA::canasta(int pCodMarca) {
+	
+	if (raiz -> codMarca == pCodMarca) {
+		return raiz -> canasta;
+	} else {
+		if (pCodMarca < raiz -> codMarca) {
+			return canastaRecursivo(raiz -> HIzq, pCodMarca);
+		} else {
+			return canastaRecursivo(raiz -> HDer, pCodMarca);
+		}
+	}
+}
 
+bool ArbolAA::canastaRecursivo(NodoAA *&r, int pCodMarca) {
+	
+	if (r -> codMarca == pCodMarca) {
+		return r -> canasta;
+	} else {
+		if (pCodMarca < r -> codMarca) {
+			return canastaRecursivo(r -> HIzq, pCodMarca);
+		} else {
+			return canastaRecursivo(r -> HDer, pCodMarca);
+		}
+	}
+}

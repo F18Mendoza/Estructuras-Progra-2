@@ -50,6 +50,14 @@ class ArbolBB {
         bool verificarCantidadRecursivo(NodoBB *&r, int pCodPasillo, int pCodProducto, int pCodMarca, int pCantidad);
         int cantidadMaxima(int pCodPasillo, int pCodProducto, int pCodMarca);
         int cantidadMaximaRecursivo(NodoBB *&r, int pCodPasillo, int pCodProducto, int pCodMarca);
+        bool canasta(int pCodPasillo, int pCodProducto, int pCodMarca);
+        bool canastaRecursivo(NodoBB *&r, int pCodPasillo, int pCodProducto, int pCodMarca);
+        float obtenerPrecio(int pCodPasillo, int pCodProducto, int pCodMarca);
+        float obtenerPrecioRecursivo(NodoBB *&r, int pCodPasillo, int pCodProducto, int pCodMarca);
+        string nombreProducto(int pCodPasillo, int pCodProducto);
+        string nombreProductoRecursivo(NodoBB *&r, int pCodPasillo, int pCodProducto);
+        string nombreMarca(int pCodPasillo, int pCodProducto, int pCodMarca);
+        string nombreMarcaRecursivo(NodoBB *&r, int pCodPasillo, int pCodProducto, int pCodMarca);
 };
 
 #endif

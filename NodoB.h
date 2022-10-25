@@ -30,8 +30,8 @@ class NodoB {
         	
         	nombre = pNombre;
         	codAdmin = pAdmin;
-        	NodoB *HIzq;
-        	NodoB *HDer;
+        	HIzq = NULL;
+        	HDer = NULL;
 		}
 
     friend class ArbolB;
