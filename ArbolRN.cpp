@@ -23,6 +23,47 @@ void ArbolRN::podarRecursivo(NodoRN *&r) {
     }
 }
 
+void ArbolRN::revisarGondolas(){
+	
+	int abastecer = 7;
+	int cantGondola;
+	
+	if (raiz != NULL){
+		
+		revisarGondolasRecursivo (raiz->HIzq);
+		revisarGondolasRecursivo (raiz -> HDer);
+		
+		if (raiz->cantidad < 2){
+			cantGondola = raiz->cantidad;
+			cout << "La cantidad que había en gondola era de: " << cantGondola << endl;
+			raiz->cantidad = abastecer;
+			cantGondola = abastecer+cantGondola;
+			cout << "La nueva cantidad en gondola es de: " << cantGondola;
+		}
+	}
+}
+
+void ArbolRN::revisarGondolasRecursivo(NodoRN *&r){
+	
+	int abastecer = 7;
+	int cantGondola;
+	
+	if (raiz != NULL){
+		
+		revisarGondolasRecursivo (r->HIzq);
+		revisarGondolasRecursivo (r-> HDer);
+		
+		if (raiz->cantidad < 2){
+			cantGondola = raiz->cantidad;
+			cout << "La cantidad que había en gondola era de: " << cantGondola << endl;
+			raiz->cantidad = abastecer;
+			cantGondola = abastecer+cantGondola;
+			cout << "La nueva cantidad en gondola es de: " << cantGondola;
+		}
+	}
+
+}
+
 void ArbolRN::insertar(string pNombre, int pCodMarca, int pCantidad, float pPrecio) {
 
     if (raiz == NULL)
