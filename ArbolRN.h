@@ -39,6 +39,8 @@ class ArbolRN {
         float obtenerPrecioRecursivo(NodoRN *&r, int pCodMarca);
         string nombreMarca(int pCodMarca);
         string nombreMarcaRecursivo(NodoRN *&r, int pCodMarca);
+        void sacarDeGondola(int pCodMarca, int pCantidad);
+        void sacarDeGondolaRecursivo(NodoRN *&r, int pCodMarca, int pCantidad);
 		
     friend class NodoAVL;
 };

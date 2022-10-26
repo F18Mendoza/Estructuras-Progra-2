@@ -27,6 +27,8 @@ class ArbolAA {
         void modificarMarcaNombreRecursivo(NodoAA *&r, string pNombre, int pCodMarca);
         bool canasta(int pCodMarca);
         bool canastaRecursivo(NodoAA *&r, int pCodMarca);
+        void verificarInventario();
+        void verificarInventarioRecursivo(NodoAA *&r);
 };
 
 #endif

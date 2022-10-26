@@ -26,6 +26,7 @@ class Carrito {
 		int obtenerCodigoMarca();
 		int obtenerCantidad();
 		void sacarArticulo();
+		bool existeArticulo(int pCodPasillo, int pCodProducto, int pCodMarca);
 	
 	friend class Compras;
 };

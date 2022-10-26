@@ -15,14 +15,27 @@ Carrito::~Carrito() {
 
 void Carrito::agregarArticulo(int pCodPasillo, int pCodProducto, int pCodMarca, int pCantidad) {
 	
+	Articulo *temp = primero;
 	if (primero == NULL) {
 		primero = new Articulo(pCodPasillo, pCodProducto, pCodMarca, pCantidad);
 	} else {
-		Articulo *temp = primero;
-		while (temp -> siguiente != NULL) {
-			temp = temp -> siguiente;
+		if (!existeArticulo(pCodPasillo, pCodProducto, pCodMarca)) {
+			while (temp -> siguiente != NULL) {
+				temp = temp -> siguiente;
+			}
+			temp -> siguiente = new Articulo(pCodPasillo, pCodProducto, pCodMarca, pCantidad);
+		} else {
+			while (temp != NULL) {
+				if (temp -> codPasillo == pCodPasillo) {
+					if (temp -> codProducto == pCodProducto) {
+						if (temp -> codMarca == pCodMarca) {
+							temp -> cantidad += pCantidad;
+							break;
+						}
+					}
+				}
+			}
 		}
-		temp -> siguiente = new Articulo(pCodPasillo, pCodProducto, pCodMarca, pCantidad);
 	}
 }
 
@@ -77,3 +90,40 @@ int Carrito::obtenerCantidad() {
 	}
 	return temp -> cantidad;
 }
+
+bool Carrito::existeArticulo(int pCodPasillo, int pCodProducto, int pCodMarca) {
+	
+	if (primero == NULL) {
+		return false;
+	} else {
+		Articulo *temp = primero;
+		while (temp != NULL) {
+			if (temp -> codPasillo == pCodPasillo) {
+				if (temp -> codProducto == pCodProducto) {
+					if (temp -> codMarca == pCodMarca) {
+						return true;
+					}
+				}
+			}
+			temp = temp -> siguiente;
+		}
+		return false;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

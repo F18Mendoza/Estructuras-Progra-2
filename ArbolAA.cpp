@@ -159,3 +159,25 @@ bool ArbolAA::canastaRecursivo(NodoAA *&r, int pCodMarca) {
 		}
 	}
 }
+
+void ArbolAA::verificarInventario() {
+	
+	if (raiz != NULL) {
+		if (raiz -> stock < 20) {
+			raiz -> stock += 20;
+		}
+		verificarInventarioRecursivo(raiz -> HIzq);
+		verificarInventarioRecursivo(raiz -> HDer);
+	}
+}
+
+void ArbolAA::verificarInventarioRecursivo(NodoAA *&r) {
+	
+	if (r != NULL) {
+		if (r -> stock < 20) {
+			r -> stock += 20;
+		}
+		verificarInventarioRecursivo(r -> HIzq);
+		verificarInventarioRecursivo(r -> HDer);
+	}
+}

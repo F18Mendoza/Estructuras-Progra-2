@@ -309,3 +309,29 @@ string ArbolRN::nombreMarcaRecursivo(NodoRN *&r, int pCodMarca) {
 		}
 	}
 }
+
+void ArbolRN::sacarDeGondola(int pCodMarca, int pCantidad) {
+	
+	if (raiz -> codMarca == pCodMarca) {
+		raiz -> cantidad -= pCantidad;
+	} else {
+		if (pCodMarca < raiz -> codMarca) {
+			sacarDeGondolaRecursivo(raiz -> HIzq, pCodMarca, pCantidad);
+		} else {
+			sacarDeGondolaRecursivo(raiz -> HDer, pCodMarca, pCantidad);
+		}
+	}
+}
+
+void ArbolRN::sacarDeGondolaRecursivo(NodoRN *&r, int pCodMarca, int pCantidad) {
+	
+	if (r -> codMarca == pCodMarca) {
+		r -> cantidad -= pCantidad;
+	} else {
+		if (pCodMarca < r -> codMarca) {
+			sacarDeGondolaRecursivo(r -> HIzq, pCodMarca, pCantidad);
+		} else {
+			sacarDeGondolaRecursivo(r -> HDer, pCodMarca, pCantidad);
+		}
+	}
+}

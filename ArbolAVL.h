@@ -53,6 +53,10 @@ class ArbolAVL {
         string nombreProductoRecursivo(NodoAVL *&r, int pCodProducto);
         string nombreMarca(int pCodProducto, int pCodMarca);
         string nombreMarcaRecursivo(NodoAVL *&r, int pCodProducto, int pCodMarca);
+        void sacarDeGondola(int pCodProducto, int pCodMarca, int pCantidad);
+        void sacarDeGondolaRecursivo(NodoAVL *&r, int pCodProducto, int pCodMarca, int pCantidad);
+        void verificarInventario();
+        void verificarInventarioRecursivo(NodoAVL *&r);
 
     friend class NodoBB;
 };
