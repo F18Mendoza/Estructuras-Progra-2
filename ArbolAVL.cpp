@@ -498,3 +498,76 @@ string ArbolAVL::nombreMarcaRecursivo(NodoAVL *&r, int pCodProducto, int pCodMar
 		}
 	}
 }
+
+void ArbolAVL::sacarDeGondola(int pCodProducto, int pCodMarca, int pCantidad) {
+	
+	if (raiz -> codProducto == pCodProducto) {
+		raiz -> marcas.sacarDeGondola(pCodMarca, pCantidad);
+	} else {
+		if (pCodProducto < raiz -> codProducto) {
+			sacarDeGondolaRecursivo(raiz -> HIzq, pCodProducto, pCodMarca, pCantidad);
+		} else {
+			sacarDeGondolaRecursivo(raiz -> HDer, pCodProducto, pCodMarca, pCantidad);
+		}
+	}
+}
+
+void ArbolAVL::sacarDeGondolaRecursivo(NodoAVL *&r, int pCodProducto, int pCodMarca, int pCantidad) {
+	
+	if (r -> codProducto == pCodProducto) {
+		r -> marcas.sacarDeGondola(pCodMarca, pCantidad);
+	} else {
+		if (pCodProducto < r -> codProducto) {
+			sacarDeGondolaRecursivo(r -> HIzq, pCodProducto, pCodMarca, pCantidad);
+		} else {
+			sacarDeGondolaRecursivo(r -> HDer, pCodProducto, pCodMarca, pCantidad);
+		}
+	}
+}
+
+void ArbolAVL::verificarInventario() {
+	
+	if (raiz != NULL) {
+		
+		raiz -> inventario.verificarInventario();
+		verificarInventarioRecursivo(raiz -> HIzq);
+		verificarInventarioRecursivo(raiz -> HDer);
+	}
+}
+
+void ArbolAVL::verificarInventarioRecursivo(NodoAVL *&r) {
+	
+	if (r != NULL) {
+		
+		r -> inventario.verificarInventario();
+		verificarInventarioRecursivo(r -> HIzq);
+		verificarInventarioRecursivo(r -> HDer);
+	}
+}
+
+void ArbolAVL::revisarGondolas(){
+	
+	
+	if (raiz != NULL){
+		
+		revisarGondolasRecursivo(raiz->HIzq);
+		revisarGondolasRecursivo(raiz->HDer);
+		
+		raiz->marcas.revisarGondolas();
+
+}
+}
+
+void ArbolAVL::revisarGondolasRecursivo(NodoAVL *&r){
+	
+	
+	if (r != NULL){
+		
+		revisarGondolasRecursivo(r->HIzq);
+		revisarGondolasRecursivo(r->HDer);
+		
+		r->marcas.revisarGondolas();
+
+}
+
+}

@@ -572,3 +572,75 @@ string ArbolBB::nombreMarcaRecursivo(NodoBB *&r, int pCodPasillo, int pCodProduc
 		}
 	}
 }
+
+void ArbolBB::sacarDeGondola(int pCodPasillo, int pCodProducto, int pCodMarca, int pCantidad) {
+	
+	if (raiz -> codPasillo == pCodPasillo) {
+		raiz -> productos.sacarDeGondola(pCodProducto, pCodMarca, pCantidad);
+	} else {
+		if (pCodPasillo < raiz -> codPasillo) {
+			sacarDeGondolaRecursivo(raiz -> HIzq, pCodPasillo, pCodProducto, pCodMarca, pCantidad);
+		} else {
+			sacarDeGondolaRecursivo(raiz -> HDer, pCodPasillo, pCodProducto, pCodMarca, pCantidad);
+		}
+	}
+}
+
+void ArbolBB::sacarDeGondolaRecursivo(NodoBB *&r, int pCodPasillo, int pCodProducto, int pCodMarca, int pCantidad) {
+	
+	if (r -> codPasillo == pCodPasillo) {
+		r -> productos.sacarDeGondola(pCodProducto, pCodMarca, pCantidad);
+	} else {
+		if (pCodPasillo < r -> codPasillo) {
+			sacarDeGondolaRecursivo(r -> HIzq, pCodPasillo, pCodProducto, pCodMarca, pCantidad);
+		} else {
+			sacarDeGondolaRecursivo(r -> HDer, pCodPasillo, pCodProducto, pCodMarca, pCantidad);
+		}
+	}
+}
+
+void ArbolBB::verificarInventario() {
+	
+	if (raiz != NULL) {
+		
+		raiz -> productos.verificarInventario();
+		verificarInventarioRecursivo(raiz -> HIzq);
+		verificarInventarioRecursivo(raiz -> HDer);
+	}
+}
+
+void ArbolBB::verificarInventarioRecursivo(NodoBB *&r) {
+	
+	if (r != NULL) {
+		
+		r -> productos.verificarInventario();
+		verificarInventarioRecursivo(r -> HIzq);
+		verificarInventarioRecursivo(r -> HDer);
+	}
+}
+
+void ArbolBB::revisarGondolas(){
+	
+
+	if (raiz != NULL){
+		
+		revisarGondolasRecursivo(raiz->HIzq);
+		revisarGondolasRecursivo(raiz->HDer);
+		
+		raiz->productos.revisarGondolas();
+
+}
+}
+void ArbolBB::revisarGondolasRecursivo(NodoBB *&r){
+	
+	
+	if (r != NULL){
+		
+		revisarGondolasRecursivo(r->HIzq);
+		revisarGondolasRecursivo(r->HDer);
+		
+		r->productos.revisarGondolas();
+
+}
+
+}

@@ -127,6 +127,7 @@ void menuClientesRegistrado(int &descuento, ArbolBB &supermercado, Compras &cola
 									}
 									colaCompras.agregarArticulo(cedulaCliente, codigoPasillo, codigoProducto, codigoMarca, cantidad);
 									cout << "Los articulos han sido agregados a su carrito de compras.";
+									
 								} else {
 									if (cantidad == 0) {
 										cout << "No se tomaran articulos." << endl;
@@ -134,8 +135,17 @@ void menuClientesRegistrado(int &descuento, ArbolBB &supermercado, Compras &cola
 										break;
 									}
 								}
+							}else{
+								cout << "La marca ingresada no existe" << endl;
+								break;
 							}
+						}else{
+							cout << "El producto ingresado no existe" << endl;
+							break;
 						}
+					}else{
+						cout << "El pasillo ingresado no existe" << endl;
+						break;
 					}
 					cout << endl << "Si desea continuar comprando digite 1." << endl;
 					cout << "Si no desea continuar digite 2." << endl;
@@ -385,7 +395,7 @@ void baseDeDatos(ArbolB &clientes, int &descuento, ArbolBB &supermercado, ListaD
 			case '4':
 				cout << "Para los clientes que han facturado al menos 3 veces... " << endl;
 				cout << "El descuento actual es del " << descuento << "%." << endl;
-				listaDescuentos.todos(descuento);
+				listaDescuentos.todos();
 				break;
 				
 			case '5':
@@ -463,27 +473,35 @@ void reportes(ArbolBB &supermercado, ArbolB &clientes, Reportes &listaReportes){
 				break;
 				
 			case 3:
-				cout << "salen productos mas vendidos por pasillo" << endl;
+				cout << "Ingrese el codigo del pasillo: " << endl;
+				cin >> pasilloCliente;
+				if (supermercado.existeCodigo(pasilloCliente)){
+					listaReportes.productosMostrarComprados(pasilloCliente);
+					break;
+				}
+				cout << "Pasillo no valido" << endl;
 				break;
 				
 			case 4:
 				cout << "salen marcas mas vendidas" << endl;
+				cout << "No se logro realizar" << endl;
 				break;
 				
 			case 5:
-				cout << "sale cliente que mas compro" << endl;
+				listaReportes.clienteMasCompro();
 				break;
 				
 			case 6:
-				cout << "sale cliente que menos compro" << endl;
+				listaReportes.clienteMenosCompro();
 				break;
 		
 			case 7: 
 				cout << "sale producto mas cargado en gondolas" << endl;
+				cout << "No se logro realizar" << endl;
 				break;
 				
 			case 8:
-				cout << "sale cliente que mas facturo" << endl;
+				listaReportes.clienteMasFacturo();
 				break;
 				
 			case 9:
@@ -503,7 +521,7 @@ void reportes(ArbolBB &supermercado, ArbolB &clientes, Reportes &listaReportes){
 				break;
 			
 			case 10:
-				cout << "sale la factura de mayor monto" << endl;
+				listaReportes.facturasMayorMonto();
 				break;
 				
 			case 11: 
@@ -580,9 +598,11 @@ void menuAdministrador(ArbolB &clientes, int &descuento, ArbolBB &supermercado, 
 						string nomArchivo(to_string(cedula));
 						file.open(nomArchivo);
 						file << "----------Factura----------" << endl;
+						file << "Consecutivo factura: # " << to_string(consecutivoFacturas) << endl;
+						consecutivoFacturas ++;
 						file << "Nombre del cliente: " << clientes.nombreCliente(cedula) << endl;
 						file << "Telefono del cliente: " << to_string(clientes.telefonoCliente(cedula))<< endl;
-						file << "Cantidad	|	Producto	|	Marca	|	Precio	|"<<endl;
+						file << "Cantidad	|	Producto	|	Marca	|	Precio unitario	|"<<endl;
 						float total = 0;
 						while (!colaCompras.carritoVacio()) {
 							int codPasillo = colaCompras.obtenerCodigoPasillo();
@@ -602,9 +622,21 @@ void menuAdministrador(ArbolB &clientes, int &descuento, ArbolBB &supermercado, 
 
 							colaCompras.sacarArticulo();
 						}
-													file << "--------------------------------------------------------------------\n" << endl;
+						file << "--------------------------------------------------------------------\n" << endl;
+						if (listaDescuentos.cumpleRequisitos(cedula)){
+							file << "El descuento que usted posee como cliente es: " << descuento << endl;
+							float porcentajeDescuento = descuento/100;
+							float totalDescuento = total*porcentajeDescuento;
+							total = total-totalDescuento;
+							file << "El total de su compra es de: " << to_string(total) << endl;
+							file << "Gracias por su compra. Vuelva pronto" << endl;
+						}
+						else{
+						file << "Usted todavía no posee ningún descuento" << endl;
 						file << "El total de su compra es de: " << to_string(total) << endl;
 						file << "Gracias por su compra. Vuelva pronto" << endl;
+						}
+						listaReportes.agregarFactura(consecutivoFacturas, total);
 						listaDescuentos.nuevaFactura(cedula);
 					} else {
 						cout << "La cedula ingresada no coincide con la del primer usuario en la cola." << endl;
@@ -613,11 +645,11 @@ void menuAdministrador(ArbolB &clientes, int &descuento, ArbolBB &supermercado, 
 					cout << "La cedula ingresada no existe en el registro de clientes." << endl;
 				}
 				break;
-			case '3':
-				cout << "Revisar Gondolas" << endl;	
+			case '3':				
+				supermercado.revisarGondolas();
 				break;	
-			case '4':
-				cout << "Verificar Inventarios" << endl;
+			case '4':				
+				supermercado.verificarInventario();
 				break;
 			case '5':
 				reportes(supermercado, clientes, listaReportes);

@@ -20,7 +20,7 @@ class ListaDescuento {
 		bool cumpleRequisitos(int pCedula);
 		void agregarCliente(int pCedula);
 		void nuevaFactura(int pCedula);
-		void todos(int pDescuento);
+		void todos();
 };
 
 #endif

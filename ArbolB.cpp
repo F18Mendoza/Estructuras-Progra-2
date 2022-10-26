@@ -112,9 +112,9 @@ bool ArbolB::existeAdmin(int pAdmin) {
         else {
             
             if (pAdmin < raiz -> codAdmin)
-                return existeCedulaRecursivo(pAdmin, raiz -> HIzq);
+                return existeAdminRecursivo(pAdmin, raiz -> HIzq);
             else
-                return existeCedulaRecursivo(pAdmin, raiz -> HDer);
+                return existeAdminRecursivo(pAdmin, raiz -> HDer);
         }
     }
 }
@@ -130,9 +130,9 @@ bool ArbolB::existeAdminRecursivo(int pAdmin, NodoB *&r) {
         else {
 
             if (pAdmin < r -> codAdmin)
-                return existeCedulaRecursivo(pAdmin, r -> HIzq);
+                return existeAdminRecursivo(pAdmin, r -> HIzq);
             else
-                return existeCedulaRecursivo(pAdmin, r -> HDer);
+                return existeAdminRecursivo(pAdmin, r -> HDer);
         }
     }
 }
@@ -144,7 +144,7 @@ void ArbolB::insertar(int pAdmin, string pNombre) {
         
     else {
 
-        if (!existeCedula(pAdmin)){
+        if (!existeAdmin(pAdmin)){
 
             if (pAdmin < raiz -> codAdmin)
                 insertarRecursivo(raiz -> HIzq, pAdmin, pNombre);

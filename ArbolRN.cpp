@@ -1,5 +1,6 @@
 #include "ArbolRN.h"
 #include <iostream>
+#include <sstream>
 
 using namespace std;
 
@@ -308,4 +309,76 @@ string ArbolRN::nombreMarcaRecursivo(NodoRN *&r, int pCodMarca) {
 			return nombreMarcaRecursivo(r -> HDer, pCodMarca);
 		}
 	}
+}
+
+void ArbolRN::sacarDeGondola(int pCodMarca, int pCantidad) {
+	
+	if (raiz -> codMarca == pCodMarca) {
+		raiz -> cantidad -= pCantidad;
+	} else {
+		if (pCodMarca < raiz -> codMarca) {
+			sacarDeGondolaRecursivo(raiz -> HIzq, pCodMarca, pCantidad);
+		} else {
+			sacarDeGondolaRecursivo(raiz -> HDer, pCodMarca, pCantidad);
+		}
+	}
+}
+
+void ArbolRN::sacarDeGondolaRecursivo(NodoRN *&r, int pCodMarca, int pCantidad) {
+	
+	if (r -> codMarca == pCodMarca) {
+		r -> cantidad -= pCantidad;
+	} else {
+		if (pCodMarca < r -> codMarca) {
+			sacarDeGondolaRecursivo(r -> HIzq, pCodMarca, pCantidad);
+		} else {
+			sacarDeGondolaRecursivo(r -> HDer, pCodMarca, pCantidad);
+		}
+	}
+}
+
+
+void ArbolRN::revisarGondolas(){
+	
+	int abastecer = 7;
+	
+	if (raiz != NULL){
+		
+		
+		revisarGondolasRecursivo(raiz->HIzq);
+		revisarGondolasRecursivo(raiz->HDer);
+		
+		if (raiz->cantidad < 2){
+			
+			int cantGondola = raiz->cantidad;
+			cout << "La cantidad existente en la gondola era de: " << cantGondola << endl;
+			raiz->cantidad = (abastecer + cantGondola);
+			string newCantidad = to_string(raiz->cantidad);
+			cout << "La nueva cantidad en gondola es: " << newCantidad << endl;
+		}
+	}
+	
+}
+
+
+void ArbolRN::revisarGondolasRecursivo(NodoRN *&r){
+	
+	int abastecer = 7;
+	
+	if (r != NULL){
+		
+		
+		revisarGondolasRecursivo(r->HIzq);
+		revisarGondolasRecursivo(r->HDer);
+		
+		if (r->cantidad < 2){
+			
+			int cantGondola = r->cantidad;
+			cout << "La cantidad existente en la gondola era de: " << cantGondola << endl;
+			r->cantidad = (abastecer + cantGondola);
+			string newCantidad = to_string(r->cantidad);
+			cout << "La nueva cantidad en gondola es: " << newCantidad << endl;
+		}
+	}
+	
 }

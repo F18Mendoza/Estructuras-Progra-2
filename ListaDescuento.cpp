@@ -47,14 +47,14 @@ void ListaDescuento::nuevaFactura(int pCedula) {
 	temp -> contador++;
 }
 
-void ListaDescuento::todos(int pDescuento) {
+void ListaDescuento::todos() {
 	
 	Cliente *temp = primero;
 	while (temp != NULL) {
 		if (temp -> contador >= MIN) {
-			cout << "El cliente de cedula " << temp -> cedula << " aplica para un descuento del " << pDescuento << "%." << endl;
+			cout << "El cliente de cedula " << temp -> cedula << " aplica para un descuento, ha facturado " << temp -> contador << " veces." << endl;
 		} else {
-			cout << "El cliente de cedula " << temp -> cedula << " no aplica para un descuento." << endl;
+			cout << "El cliente de cedula " << temp -> cedula << " no aplica para un descuento, ha facturado " << temp -> contador << " veces." << endl;
 		}
 		temp = temp -> siguiente;
 	}
