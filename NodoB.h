@@ -12,6 +12,7 @@ class NodoB {
         int cedula;
         int telefono;
         int codAdmin;
+        int codVendedor;
         NodoB *HIzq;
         NodoB *HDer;
 
@@ -32,6 +33,14 @@ class NodoB {
         	codAdmin = pAdmin;
         	HIzq = NULL;
         	HDer = NULL;
+		}
+		
+		NodoB(std::string pNombre, int pVendedor){
+			
+			nombre = pNombre;
+			codVendedor = pVendedor;
+			HIzq = NULL;
+			HDer = NULL;
 		}
 
     friend class ArbolB;

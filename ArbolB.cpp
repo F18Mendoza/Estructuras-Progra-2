@@ -63,6 +63,28 @@ void ArbolB::mostrarAdminRecursivo(NodoB *&r){
 	}
 }
 
+void ArbolB::mostrarVendedor(){
+	
+	if (raiz != NULL){
+		
+		mostrarVendedorRecursivo(raiz->HIzq);
+		mostrarVendedorRecursivo(raiz->HDer);
+		cout << raiz->codVendedor << "  |  " <<raiz->nombre<< endl;
+	}
+}
+
+void ArbolB::mostrarVendedorRecursivo(NodoB *&r){
+	
+	if (r != NULL){
+		
+		mostrarVendedorRecursivo(r->HIzq);
+		mostrarVendedorRecursivo(r->HDer);
+		cout << r->codVendedor << "  |  " <<r->nombre<< endl;
+	}
+}
+
+
+
 
 bool ArbolB::existeCedula(int pCedula) {
 
@@ -137,6 +159,43 @@ bool ArbolB::existeAdminRecursivo(int pAdmin, NodoB *&r) {
     }
 }
 
+bool ArbolB::existeVendedor(int pVendedor) {
+
+    if (raiz == NULL)
+        return false;
+    else {
+
+        if (raiz -> codVendedor == pVendedor)
+            return true;
+        else {
+            
+            if (pVendedor < raiz -> codVendedor)
+                return existeVendedorRecursivo(pVendedor, raiz -> HIzq);
+            else
+                return existeVendedorRecursivo(pVendedor, raiz -> HDer);
+        }
+    }
+}
+
+bool ArbolB::existeVendedorRecursivo(int pVendedor, NodoB *&r) {
+
+    if (r == NULL)
+        return false;
+    else {
+
+        if (r -> codVendedor == pVendedor)
+            return true;
+        else {
+
+            if (pVendedor < r -> codVendedor)
+                return existeVendedorRecursivo(pVendedor, r -> HIzq);
+            else
+                return existeVendedorRecursivo(pVendedor, r -> HDer);
+        }
+    }
+}
+
+
 void ArbolB::insertar(int pAdmin, string pNombre) {
 
     if (raiz == NULL)
@@ -166,6 +225,38 @@ void ArbolB::insertarRecursivo(NodoB *&r, int pAdmin, string pNombre){
         }
     }
 }
+
+
+void ArbolB::insertar(string pNombre, int pVendedor) {
+
+    if (raiz == NULL)
+        raiz = new NodoB(pNombre, pVendedor);
+        
+    else {
+
+        if (!existeVendedor(pVendedor)){
+
+            if (pVendedor < raiz -> codVendedor)
+                insertarRecursivo(raiz -> HIzq, pNombre, pVendedor);
+            else
+                insertarRecursivo(raiz -> HDer, pNombre, pVendedor);
+        }
+    }
+}
+
+void ArbolB::insertarRecursivo(NodoB *&r,string pNombre, int pVendedor){
+
+    if (r == NULL) {
+    	r = new NodoB(pNombre, pVendedor);
+    } else {
+        if (pVendedor < r -> codVendedor){
+            insertarRecursivo(r -> HIzq, pNombre, pVendedor);
+        } else {
+            insertarRecursivo(r -> HDer, pNombre, pVendedor);
+        }
+    }
+}
+
 
 void ArbolB::insertar(int pCedula, string pNombre, int pTelefono, string pCorreo) {
 

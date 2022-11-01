@@ -650,6 +650,7 @@ void menuAdministrador(ArbolB &clientes, int &descuento, ArbolBB &supermercado, 
 				break;	
 			case '4':				
 				supermercado.verificarInventario();
+				cout << "El inventario ha sido reabastecido" << endl;
 				break;
 			case '5':
 				reportes(supermercado, clientes, listaReportes);
@@ -779,6 +780,89 @@ int main() {
 	}
 	
 	archivo6.close();
+
+//------------------------LECTURA DE VENDEDORES -----------------------------------
+	
+	string vendedor;
+	ArbolB vendedores;
+	
+	ifstream archivo7 ("Vendedores.txt");
+	while (!archivo7.eof()){
+		getline(archivo7, linea);
+		stringstream input_stringstream(linea);
+		getline(input_stringstream, vendedor, ';');
+		getline(input_stringstream, nombre, ';');
+		vendedores.insertar(nombre, stoi(vendedor));
+	}
+	
+	archivo7.close();
+	
+//--------------------LECTURA DE CIUDADES--------------------------
+
+	string ciudad1, ciudad2, peso;
+	//GradoCiudades
+	
+	ifstream archivo8 ("Ciudades.txt");
+	while (!archivo8.eof()){
+		getline(archivo8, linea);
+		stringstream input_stringstream(linea);
+		getline(input_stringstream, ciudad1, ';');
+		getline(input_stringstream, nombre, ';');
+		cout << ciudad1 << "	|	" << nombre << endl;
+	}
+	
+	archivo8.close();
+
+	cout << "-----------------------------------------" << endl;
+
+
+//--------------------LECTURA DE CONEXIONES--------------------------
+	
+	
+	ifstream archivo9 ("Conexiones.txt");
+	while (!archivo9.eof()){
+		getline(archivo9, linea);
+		stringstream input_stringstream(linea);
+		getline(input_stringstream, ciudad1, ';');
+		getline(input_stringstream, ciudad2, ';');
+		getline(input_stringstream, peso, ';');
+		cout << ciudad1 << "	|	" <<ciudad2 << "	|	" << peso << endl;
+	}
+	
+	archivo9.close();	
+	
+	cout << "-----------------------------------------" << endl;	
+	
+//--------------------LECTURA DE CIUDADES1--------------------------
+
+	ifstream archivo10 ("Ciudades1.txt");
+	while (!archivo10.eof()){
+		getline(archivo10, linea);
+		stringstream input_stringstream(linea);
+		getline(input_stringstream, ciudad1, ';');
+		getline(input_stringstream, nombre, ';');
+		cout << ciudad1 << "	|	" << nombre << endl;
+	}	
+	
+	archivo10.close();
+	cout << "-----------------------------------------" << endl;
+	
+//--------------------LECTURA DE CONEXIONES1--------------------------	
+	
+	
+	ifstream archivo11 ("Conexiones1.txt");
+	while (!archivo11.eof()){
+		getline(archivo11, linea);
+		stringstream input_stringstream(linea);
+		getline(input_stringstream, ciudad1, ';');
+		getline(input_stringstream, ciudad2, ';');
+		cout << ciudad1 << "	|	" <<ciudad2  << endl;
+	}
+	
+	archivo11.close();
+
+
+//----------------------MENU PRINCIPAL---------------------------
 	
 	char ingreso;
 	int cedCliente, codigoAdmin;
